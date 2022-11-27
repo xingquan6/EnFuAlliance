@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Bible Content</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="bible/bibleChaptors.js"></script>
+    <script>
+        $(document).ready(function () {
+            var chaptors = $("#bibleChaptor");
+            for (let i = 0; i < bibleChaptors.length; i++) {
+                let separator = $("<hr>").appendTo(chaptors);
+                let newChaptor = $("<div>").appendTo(chaptors);
+                let chaptorText = bibleChaptors[i].FullName + ': ';
+                newChaptor.text(chaptorText);
+                newChaptor.attr("id", "Chaptor" + bibleChaptors[i].BibleChaptorId);
+                for (let j = 0; j < bibleChaptors[i].TotalChaptors; j++) {
+                    let newVerse = $("<button>").appendTo(newChaptor);
+                    let verseText = (j + 1) + ' ';
+                    newVerse.text(verseText);
+                    newVerse.attr("id", "Chaptor" + bibleChaptors[i].BibleChaptorId + '_' + (j + 1));
+                    newVerse.attr("class", bibleChaptors[i].BibleChaptorId);
+                    newVerse.attr("style", "min-width:60px;");
+                    //newVerse.attr("href", "bible/bible"+bibleChaptors[i].BibleChaptorId+".html#Chaptor" + bibleChaptors[i].BibleChaptorId + '_' + (j + 1));
+                    //newVerse.attr("target", "_blank");
+                };
+            };
+            $('button').on('click', function () {
+                console.log(window.location.href, $(this).attr("class"), this.id);
+                var myWindow = window.open("bible/bible.html#" + this.id, "test", "toolbar=1,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=1,width=800,height=600,left = 240,top = 212");
+                //var myWindow = window.open("bible/bible" + $(this).attr("class") + ".html?printerFriendly=true#" + this.id, "test", "toolbar=1,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=1,width=800,height=600,left = 240,top = 212");
+            });
+        });
+    </script>
+    <style>
+        body {
+            font-size: 3em;
+            height: 100%;
+        }
+        .bibleSection {
+            margin: 15px;
+            font-size: 0.6em;
+        }
+    </style>
+</head>
+<body>
+    <div id="bibleChaptorContainer" class="bibleSection">
+        <div id="bibleChaptor"></div>
+        <hr>
+    </div>
+</body>
+</html>
+

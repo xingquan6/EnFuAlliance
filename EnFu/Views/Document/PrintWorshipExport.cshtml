@@ -1,0 +1,238 @@
+﻿@model EnFu.Models.SundayReportPdfViewModel
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+    body {
+        font-size: 48px;
+    }
+    div {
+        word-break: break-all;
+    }
+    .divLeftBlock {
+        display: inline-block;
+        float: left;
+    }
+
+    .section {
+        padding-left: 15px;
+        padding-right: 15px;
+        margin: 0;
+        margin-left: -6px;
+        margin-right: -6px;
+        clear: both;
+        height: 851px;
+        background-size: 100% 100%;
+        padding-top: 50px;
+    }
+
+    .sectionTitleContainer {
+        height: 100px;
+    }
+
+    .blueLogo {
+        width: 0;
+        height: 0;
+        border-bottom: 80px solid transparent;
+        border-left: 80px solid #0070C0;
+    }
+
+    .blueLogoContainer {
+        height: 80px;
+        width: 80px;
+        display: inline-block;
+        float: left;
+    }
+
+    .sectionTitle {
+        height: 80px;
+        width: 700px;
+        display: inline-block;
+        float: left;
+        text-align: left;
+        font-size: 60px;
+        font-weight: bold;
+        padding-left: 20px;
+        padding-top: 10px;
+    }
+
+    table {
+        width: 100%;
+    }
+
+        table tr td {
+            text-align: left;
+            padding: 5px;
+        }
+
+    .tableChangeColor {
+        font-size: 30px;
+    }
+
+        .tableChangeColor tr:nth-child(even) {
+            background: #FFFFFF;
+        }
+
+        .tableChangeColor tr:nth-child(odd) {
+            background: #DCE6F2;
+        }
+
+        .tableChangeColor tr td {
+            text-align: center;
+        }
+
+            .tableChangeColor tr td:nth-child(2) {
+                text-align: left;
+            }
+
+    ul {
+        margin: 0;
+        padding: 5px;
+        list-style: none;
+    }
+
+        ul li {
+            text-align: left;
+            padding: 5px;
+        }
+
+    .tbl-bible-reading {
+        text-align: center;
+        padding-top: 20px;
+        font-size: 44px;
+        display: inline-block;
+        float: left;
+        width: 50%;
+    }
+
+        .tbl-bible-reading tr td {
+            text-align: center;
+            padding: 10px;
+        }
+
+    .sundayServe td {
+        text-align: center;
+    }
+</style>
+<div class="section" style="background-image:url('http://cafebistro.ca/S3/BackgroundPage1.jpg');">
+    <div>
+        <div style="display:inline-block;float:left;width:5%;">&nbsp;</div>
+        <div style="display:inline-block;float:left;width:90%;">
+            <img src="http://cafebistro.ca/S3/EnFuLogo.png" style="width:180px;" />
+            <span style="font-size:70px;">西岛华人宣道会恩福堂</span>
+        </div>
+    </div>
+    <div style="clear:both;margin:0 auto;width:800px;padding-top:20px;text-align:center;">
+        <div style="font-size:150px;border-top:5px solid black;border-bottom:5px solid black;padding-top:20px;padding-bottom:20px;">主 日 崇 拜</div>
+    </div>
+    <div style="clear:both;font-size:60px;margin:0 auto;width:1100px;text-align:center;padding-top:20px;">
+        崇拜即将开始，请尽快入座预备心 <br />
+        为表达对神的敬畏，请关闭手机
+    </div>
+</div>
+<div class="section" style="background-image:url('http://cafebistro.ca/S3/BackgroundPage2-3.jpg');">
+    <div style="clear:both;margin:0 auto;padding-top:20px;text-align:center;font-size:100px;color:white;">
+        <div>@Model.WorkFlow.CallDetail</div>
+        <div style="text-align:right;"> - @Model.WorkFlow.CallChaptor</div>
+    </div>
+</div>
+<div class="section" id="section3" style="background-image:url('http://cafebistro.ca/S3/BackgroundPage2-3.jpg');">
+    <div style="clear:both;margin:0 auto;padding-top:20px;text-align:center;font-size:100px;color:white;">
+        <div>上主今在他的圣殿中</div>
+        <div>上主今在他的圣殿中</div>
+        <div>万国的人当肃静</div>
+        <div>万国的人在主前当肃静</div>
+        <div>当肃静　当肃静</div>
+        <div>应当肃静　阿门</div>
+    </div>
+</div>
+<div class="section" style="background-image:url('http://cafebistro.ca/S3/BackgroundPray.jpg');">
+    <div style="clear:both;margin:0 auto;padding-top:20px;text-align:center;font-size:100px;color:white;">
+        <div style="font-size:140px;width:25%;text-align:center;">祷<br />告</div>
+    </div>
+</div>
+<div class="section"  style="background-image:url('http://cafebistro.ca/S3/BackgroundBibleReading.jpg');">
+    <div style="clear:both;margin:0 auto;padding-top:20px;text-align:center;font-size:100px;">
+        <div style="font-size:140px;text-align:center;margin-top:250px;font-weight:bold;">读  经</div>
+        <div style="font-size:80px;text-align:center;margin-top:50px;">@Model.WorkFlow.BibleReading</div>
+    </div>
+</div>
+<div class="section"  style="background-image:url('http://cafebistro.ca/S3/BackgroundBibleReading.jpg');">
+    <div style="clear:both;margin:0 auto;padding-top:20px;text-align:center;font-size:100px;">
+        <div style="font-size:140px;text-align:center;margin-top:250px;font-weight:bold;">@Model.WorkFlow.SermonTitle</div>
+        <div style="font-size:80px;text-align:center;margin-top:50px;">@Model.WorkFlow.SermonSpeaker</div>
+    </div>
+</div>
+<div class="section" style="background-image:url('http://cafebistro.ca/S3/BackgroundDonate.jpg');padding-top:0;height: 901px;">
+    <div style="clear:both;margin:0 auto;padding-top:20px;text-align:center;font-size:100px;">
+        <div style="font-size:140px;text-align:center;margin-top:0px;font-weight:bold;color:yellow;">
+            本周金句
+        </div>
+        <div style="font-size:70px;text-align:left;margin-top:20px;color:white">@Model.WorkFlow.BibleWeeklyChaptorDetail</div>
+        <div style="font-size:70px;text-align:right;margin-top:20px;color:white;"> - @Model.WorkFlow.BibleWeeklyChaptor</div>
+    </div>
+</div>
+<div class="section" style="background-image:url('http://cafebistro.ca/S3/BackgroundDonate.jpg');padding-top:0;height: 901px;">
+    <div style="clear:both;margin:0 auto;padding-top:20px;text-align:center;font-size:100px;">
+        <div style="font-size:140px;text-align:center;margin-top:50px;font-weight:bold;color:yellow;">
+            奉献回应
+        </div>
+        <div style="font-size:70px;text-align:left;margin-top:50px;color:white">@Model.WorkFlow.DonationWeeklyChaptorDetail</div>
+        <div style="font-size:70px;text-align:right;margin-top:50px;color:white;"> - @Model.WorkFlow.DonationWeeklyChaptor</div>
+    </div>
+</div>
+<div class="section" id="sectionBibleReading" style="background-image:url('http://cafebistro.ca/S3/Background31.jpg');padding-top:50px;">
+    <div style="clear:both;margin:0 auto;padding-top:20px;text-align:center;font-size:100px;">
+        <div style="font-size:140px;">
+            三一颂
+        </div>
+        <div>
+            赞美真神万福之根
+        </div>
+        <div>
+            地上生灵当赞主恩
+        </div>
+        <div>
+            天上万军颂赞主名
+        </div>
+        <div>
+            赞美圣父圣子圣灵
+        </div>
+        <div>
+            阿门
+        </div>
+    </div>
+</div>
+<div class="section" id="sectionBibleReading" style="background-image:url('http://cafebistro.ca/S3/BackgroundWelcome.jpg');">
+    <div style="clear:both;margin:0 auto;padding-top:20px;text-align:center;font-size:100px;">
+
+    </div>
+</div>
+@foreach (var item in Model.Events)
+{
+    <div class="section" id="sectionBibleReading" style="background-image:url('http://cafebistro.ca/S3/BackgroundEvent.jpg');">
+        <div style="clear:both;margin:0 auto;padding-top:5px;font-size:80px;">
+            【@item.EventName】
+        </div>
+        <div style="clear:both;margin:0 auto;padding-top:5px;font-size:80px;">
+            @item.EventDesc
+        </div>
+    </div>
+}
+
+@foreach (var item in Model.PrayEvents)
+{
+    <div class="section" id="sectionBibleReading" style="background-image:url('http://cafebistro.ca/S3/BackgroundEvent.jpg');">
+        <div style="clear:both;margin:0 auto;padding-top:5px;font-size:80px;">
+            【代祷事项】
+        </div>
+        <div style="clear:both;margin:0 auto;padding-top:5px;font-size:80px;">
+            <span>@(Model.PrayEvents.IndexOf(item)+1)</span>. @item.PrayMatterDesc
+        </div>
+    </div>
+}
+<div class="section" id="sectionBibleReading" style="background-image:url('http://cafebistro.ca/S3/BackgroundPageLast.jpg');">
+    <div style="clear:both;margin:0 auto;width:800px;padding-top:250px;text-align:center;">
+        <div style="font-size:150px;border-top:5px solid black;border-bottom:5px solid black;padding-top:20px;padding-bottom:20px;">
+            荣耀归于主
+        </div>
+    </div>
+</div>

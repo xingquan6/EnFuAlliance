@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Bible Content</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="bible.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var content = $("#bibleContent");
+            for (let i = 0; i < bibleDetails.length; i++) {
+                if (bibleDetails[i].VerseSN == 1) {
+                    let newChaptorTitle = $("<div>").appendTo(content);
+                    let volumeFullName = bibleChaptors.find(x => x.BibleChaptorId == bibleDetails[i].VolumeSN).FullName + ' ' + bibleDetails[i].ChapterSN;
+                    newChaptorTitle.text(volumeFullName);
+                    newChaptorTitle.attr("style", "margin:15px;font-weight:600;");
+                    newChaptorTitle.attr("id", "Chaptor" + bibleDetails[i].VolumeSN + '_' + bibleDetails[i].ChapterSN);
+                }
+                let newContainer = $("<div>").appendTo(content);
+                newContainer.attr("style", "border: 1px solid gray; margin:5px auto;padding:5px;")
+                let newContent = $("<p>").appendTo(newContainer);
+                let contentText = bibleDetails[i].VerseSN + ': ' + bibleDetails[i].Lection;
+                newContent.text(contentText);
+                newContent.attr("class", "cn");
+                let newContentEn = $("<p>").appendTo(newContainer);
+                let contentTextEn = bibleDetails[i].LectionEnglish;
+                newContentEn.text(contentTextEn);
+                newContentEn.attr("class", "en");
+            };
+            $('p').on('click', function () {
+                if ($(this).css('font-weight') == 600) {
+                    $(this).attr("style", "font-weight:normal;background:white;");
+                } else {
+                    $(this).attr("style", "font-weight:600;background:#F4F4F4;");
+                }
+            });
+        });
+    </script>
+    <style>
+        body {
+            font-size:54px;
+            height: 100%;
+        }
+
+        .bibleSection {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        .cn {
+            font-weight: normal;
+            background: white;
+            margin:0;
+            padding: 0;
+        }
+        .en {
+            font-weight: normal;
+            background: white;
+            margin: 0;
+            padding: 0;
+            font-size: 0.7em;
+        }
+    </style>
+</head>
+<body>
+    <div id="bibleContentContainer" class="bibleSection">
+        <div id="bibleContent"></div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,212 @@
+﻿<script>
+    window.dataModel = @Html.Raw(Json.Encode(Model));
+    $(document).ready(function () {
+        $(document).on('click', '.btn-add-event', function () {
+            $('#tbl-event tr').last().clone().appendTo($('#tbl-event'));
+        });
+        $(document).on('click', '.btn-delete-event', function () {
+            $(this).closest('tr').remove();
+        });
+        $(document).on('click', '.btn-submit-data', function () {
+            var i = 0;            
+            window.dataModel.Events = [];
+            $('#tbl-event tr').each(function () {
+                if (i != 0) {
+                    var event = { EventName: "", EventDateTime: "", EventDesc: "" };
+                    event.EventName = this.children[0].children[0].value;
+                    event.EventDateTime = this.children[1].children[0].value;
+                    event.EventDesc = this.children[2].children[0].value;
+                    window.dataModel.Events.push(event);
+                };
+                i++;
+            });
+            debugger;
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Index", "Document")',
+                dataType: 'json',
+                data: JSON.stringify(window.dataModel),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log('Submission was successful.');
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log('An error occurred.');
+                    console.log(data);
+                },
+            });
+        });
+    });
+</script>
+
+<style>
+    table {
+        border: 1px solid lightgrey;
+    }
+
+        table td, th {
+            border: 1px solid lightgrey;
+            text-align: center;
+            padding: 5px;
+        }
+
+            table td div {
+                margin: 0 auto;
+            }
+</style>
+
+@model EnFu.Models.SundayReportViewModel
+<div>
+    @Html.AntiForgeryToken()
+    <h4>更新周报</h4>
+    <h5>@DateTime.Today.AddDays(7 - (int)DateTime.Today.DayOfWeek).ToString("yyyy-MM-dd")</h5>
+    <hr />
+    <div>
+        <div class="form-group col-md-6">
+            <div class="col-md-offset-2">
+                <button class="btn btn-warning btn-submit-data">更新</button>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="col-md-offset-2">
+                <a class="btn btn-warning" href="#">取消</a>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm("Index", "Document", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+
+        <div style="clear:both;">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+        </div>
+        <h5>家事报告</h5>
+        <table style="width:100%;" id="tbl-event">
+            @{
+                <tr>
+                    <th style="width:25%;">
+                        事件
+                    </th>
+                    <th style="width:15%;">
+                        时间
+                    </th>
+                    <th style="width:50%;">
+                        内容
+                    </th>
+                    <th style="width:10%;">
+                        <input type="button" value="增加" class="btn btn-primary btn-add-event" />
+                    </th>
+                </tr>
+                if (Model.Events != null)
+                {
+                    int i = 0;
+                    foreach (var item in Model.Events)
+                    {
+                        if (item.EventName == null)
+                        {
+                            <tr hidden>
+                                <td>
+                                    @Html.EditorFor(m => m.Events[i].EventName, new { @class = "form-control" })
+                                </td>
+                                <td>
+                                    @Html.EditorFor(m => m.Events[i].EventDateTime, new { @class = "form-control" })
+                                </td>
+                                <td>
+                                    @Html.TextAreaFor(m => m.Events[i].EventDesc, 10, 100, new { @class = "form-control", @rows = "20", @cols = "50" })
+                                </td>
+                                <td>
+                                    <input type="button" value="删除" class="btn btn-danger btn-delete-event" />
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>
+                                    @Html.EditorFor(m => m.Events[i].EventName, new { @class = "form-control" })
+                                </td>
+                                <td>
+                                    @Html.EditorFor(m => m.Events[i].EventDateTime, new { @class = "form-control" })
+                                </td>
+                                <td>
+                                    @Html.TextAreaFor(m => m.Events[i].EventDesc, new { @class = "form-control", @style = "height: 4em;width: 50em; resize: both;overflow: auto;padding: 5px;" })
+                                </td>
+                                <td>
+                                    <input type="button" value="删除" class="btn btn-danger btn-delete-event" />
+                                </td>
+                            </tr>
+                        }
+                        i++;
+                    }
+                }
+            }
+        </table>
+        <br />
+        <hr />
+        <h5>主日事奉團</h5>
+        <table style="width:100%;">
+            @{
+                <tr>
+                    <th style="width:25%;">
+                        类型
+                    </th>
+                    <th style="width:15%;">
+                        姓名
+                    </th>
+                    <th style="width:50%;">
+
+                    </th>
+                    <th style="width:10%;">
+                        <input type="button" value="增加" class="btn btn-primary" />
+                    </th>
+                </tr>
+                int j = 0;
+                if (Model.SundayWorkers != null && Model.SundayWorkers.Count > 0)
+                {
+                    foreach (var item in Model.SundayWorkers.ToList())
+                    {
+                        <tr>
+                            <td>
+                                @Html.EditorFor(m => m.SundayWorkers[j].ServiceType, new { @class = "form-control" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(m => m.SundayWorkers[j].WorkerName, new { @class = "form-control" })
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="button" value="删除" class="btn btn-danger" />
+                            </td>
+                        </tr>
+                        j++;
+                    }
+                }
+            }
+        </table>
+        <br />
+        <hr />
+        <div>
+            <div class="form-group col-md-6">
+                <div class="col-md-offset-2">
+                    <button class="btn btn-warning btn-submit-data">更新</button>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="col-md-offset-2">
+                    <a class="btn btn-warning" href="#">取消</a>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both;height:1em;"></div>
+        <hr />
+    }
+    <div class="form-group col-md-12" onclick="postform.submit();" style="clear:both;">
+        <form method="POST" name="postform" id="@Model.Id" action="/Document/Download/">
+            <input hidden="hidden" name="id" value="@Model.Id" />
+        </form>
+        <a class="btn btn-success" href="#">下载周报</a>
+    </div>
+</div>
+<div style="clear:both;">
+
+</div>
+

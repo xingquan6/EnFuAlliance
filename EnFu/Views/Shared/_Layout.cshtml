@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container" style="width:99%;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("首页", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li style="font-weight:bolder;font-size:1.5em;">@Html.ActionLink("打印周报", "Download", "Document")</li>
+                    <li>@Html.ActionLink("崇拜程序", "WorkFlow", "Document")</li>
+                    <li>@Html.ActionLink("崇拜歌曲", "WorshipSongServe", "Document")</li>
+                    <li>@Html.ActionLink("家事报告", "Event", "Document")</li>
+                    <li>@Html.ActionLink("代祷事项", "PrayMatter", "Document")</li>
+                    <li>@Html.ActionLink("主日服侍", "SundayServe", "Document")</li>
+                    <li>@Html.ActionLink("聚会", "GroupMeeting", "Document")</li>
+                    <li>@Html.ActionLink("奉献", "Donate", "Document")</li>
+                    <li>@Html.ActionLink("灵修小品", "SpiritualEssay", "Document")</li>
+                    <li style="font-weight:bolder;font-size:1.5em;">@Html.ActionLink("下载周报", "DownloadPdf", "Document")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="min-height:300px;margin-top:100px;">
+        @RenderBody()
+    </div>
+    <hr />
+    <footer>
+        <p style="text-align:center;">&copy; @DateTime.Now.Year - 恩福堂周报</p>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

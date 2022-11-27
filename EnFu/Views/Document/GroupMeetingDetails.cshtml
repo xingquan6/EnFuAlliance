@@ -1,0 +1,40 @@
+﻿@model EnFu.Models.GroupMeetingListViewModel
+<h2>聚会人数 (@Model.GroupMeetingList.FirstOrDefault().GroupMeetingSundayReportDate.ToString("yyyy-MM-dd"))</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <hr />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="保存聚会人数" class="btn btn-success" />
+        </div>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @if (Model != null && Model.GroupMeetingList != null && Model.GroupMeetingList.Count > 0)
+    {
+        for (int i = 0; i < Model.GroupMeetingList.Count; i++)
+        {
+            <div class="form-group">
+                <div class="col-md-2" style="text-align:right;">
+                    @Model.GroupMeetingList[i].GroupMeetingType: &nbsp;
+                </div>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.GroupMeetingList[i].GroupMeetingNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GroupMeetingList[i].GroupMeetingNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.GroupMeetingList[i].GroupMeetingId)
+            @Html.HiddenFor(model => model.GroupMeetingList[i].GroupMeetingType)
+            @Html.HiddenFor(model => model.GroupMeetingList[i].GroupMeetingSundayReportDate)
+            @Html.HiddenFor(model => model.GroupMeetingList[i].GroupType)
+        }
+    }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="保存聚会人数" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+

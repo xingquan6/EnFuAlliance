@@ -1,0 +1,18 @@
+﻿@model EnFu.Models.SearchViewModel
+<div style="clear:both;width:500px;margin:0 auto;">
+    <h2>@EnFu.Helpers.TextHelper.GetSearchText(Model.SearchType)</h2>
+        <div class="form-group col-md-12" style="clear:both;">
+            <form method="POST" name="postform" id="frmPrintPdf" action="/Document/@Model.SearchType/">
+                <div class="form-group input-group-sm" style="padding-top:20px;font-size:1.25em;">
+                    <p>选择周报日期</p>
+                    @Html.DropDownListFor(m => m.SundayReportDate, new SelectList(EnFu.Modules.Enums.SundayReportConst.GetSundayList()))
+                </div>
+                <button class="btn btn-success" type="submit">制作</button>
+                <br>
+            </form>
+        </div>
+</div>
+
+<div style="clear:both;">
+
+</div>

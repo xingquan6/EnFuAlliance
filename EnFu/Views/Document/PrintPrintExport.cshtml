@@ -1,0 +1,917 @@
+﻿@model EnFu.Models.SundayReportPdfViewModel
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+    body {
+        font-size: 14px;
+        font-family: SimSun;
+        font-style: normal;
+        font-weight: 100;
+    }
+
+    .divLeftBlock {
+        display: inline-block;
+        float: left;
+    }
+
+    .pageBody {
+        background-color: white;
+        font-family: arial;
+        height: 800px;
+        margin: 5px;
+    }
+
+    .pageSection {
+        display: inline-block;
+        float: left;
+        width: 32.5%;
+        margin: 5px;
+        padding: 0;
+    }
+
+    .section {
+        padding: 2px;
+        margin-top: 4px;
+    }
+
+    .sectionTitleContainer {
+        height: 50px;
+    }
+
+    .blueLogo {
+        width: 0;
+        height: 0;
+        border-bottom: 36px solid transparent;
+        border-left: 36px solid #0070C0;
+    }
+
+    .blueLogoContainer {
+        height: 36px;
+        width: 36px;
+        display: inline-block;
+        float: left;
+    }
+
+    .sectionTitle {
+        height: 36px;
+        width: 350px;
+        display: inline-block;
+        float: left;
+        text-align: left;
+        font-size: 28px;
+        font-weight: bold;
+        padding-left: 4px;
+        padding-top: 2px;
+    }
+
+    table {
+        width: 100%;
+    }
+
+        table tr td {
+            text-align: left;
+            padding: 2px;
+        }
+
+    .tableChangeColor tr:nth-child(even) {
+        background: #FFFFFF;
+    }
+
+    .tableChangeColor tr:nth-child(odd) {
+        background: #DCE6F2;
+    }
+
+    .tableChangeColor tr td {
+        text-align: center;
+    }
+
+        .tableChangeColor tr td:nth-child(2) {
+            text-align: left;
+        }
+
+    ul {
+        margin: 0;
+        padding: 2px;
+        list-style: none;
+    }
+
+        ul li {
+            text-align: left;
+            padding: 2px;
+        }
+
+    .tbl-bible-reading {
+        margin:0;
+        padding:0;
+        text-align: center;
+        padding-top: 4px;
+        font-size: 18px;
+        width: 100%;
+        border-spacing: 0;
+    }
+
+        .tbl-bible-reading tr td {
+            text-align: center;
+            padding: 5px;
+        }
+
+    .sundayServe td {
+        text-align: center;
+    }
+
+    @@media print {
+        .divMainLogo {
+            display: inline-block;
+            float: left;
+            min-width: 100px;
+            width: 100px;
+            max-width: 100px;
+            min-height: 100px;
+            height: 100px;
+            max-height: 100px;
+            padding-left: 5px;
+        }
+    }
+
+</style>
+<div style="-webkit-print-color-adjust:exact;">
+    <div class="pageBody">
+        <div class="pageSection">
+            <div style="height:520px;">
+                <div class="sectionTitleContainer">
+                    <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                    <div class="sectionTitle">
+                        靈修小品
+                    </div>
+                </div>
+                <div>
+                    <div style="clear:both;background: #DCE6F2;height:24px;font-size:20px;padding:2px;">
+                        @Model.SpiritualEssayPray.SpiritualEssayTitle
+                    </div>
+                    <div style="font-size:13px;">
+                        <div style="font-weight:bold;margin-top:5px;margin-bottom:2px;font-size:16px;">
+                            @Model.SpiritualEssayPray.SpiritualEssayChaptor
+                        </div>
+                        <div>
+                            @foreach (var item in Model.SpiritualEssayContents)
+                            {
+                                <div style="margin-top:3px;margin-bottom:3px;">@item</div>
+                            }
+                        </div>
+                        <div>
+                            <div style="margin:0 auto;padding-top:16px;font-style:italic;width:90%;text-align:center;margin-top:3px;font-weight:bold;">
+                                @foreach (var item in Model.SpiritualEssayPrays)
+                                {
+                                    <div style="margin-top:3px;margin-bottom:3px;">@item</div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both;margin-top:5px;">
+                <div class="sectionTitleContainer">
+                    <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                    <div class="sectionTitle">
+                        教會立場
+                    </div>
+                </div>
+                <div>
+                    <table class="tableChangeColor" style="clear:both;font-size:12px;">
+                        <tr>
+                            <td style="width:12%;">
+                                政治
+                            </td>
+                            <td style="width:88%;">
+                                我们要常常为国家及政治领袖祷告，也尊重每个人的政治立场；但请不要在教会及小组中从事政治活动或发表立场或言论，避免引起不必要的冲突和对立。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                奉献
+                            </td>
+                            <td>
+                                这是每位基督徒蒙福的途径及应尽的责任（玛拉基书3:10）但若您还不是基督徒可以先不奉献，我们竭诚欢迎您早日成为主的儿女，在奉献中蒙福。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                推销
+                            </td>
+                            <td>
+                                我们尊重基金、保险、理财、直销等职业从业人员。他们可以在初入教会及小组时简单介绍自己的职业，但不宜在教会或小组中主动或强力向会友推销，若弟兄姊妹有需要可自愿性的向他们询问或购买。
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:12%;">
+                                借贷
+                            </td>
+                            <td style="width:88%;">
+                                我们鼓励弟兄姊妹在他人有缺乏时甘心乐意的资助，但会友间若有借贷或其他金钱往来时，请告知小组长和牧者以做遮盖。
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="pageSection">
+            <div class="section" id="section5" style="height:450px;">
+                <div class="sectionTitleContainer">
+                    <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                    <div class="sectionTitle">
+                        信息筆記
+                    </div>
+                </div>
+                <div style="clear:both;height:auto;background-color:#DCE6F2;padding:5px;font-size: 16px;">
+                    @Model.WorkFlow.SermonTitle | @Model.WorkFlow.BibleReading | @Model.WorkFlow.SermonSpeaker
+                </div>
+                <div style="clear:both;height:auto;background-color:#FFFFFF;padding:5px;font-size: 16px;">
+                    @foreach (var line in Model.WorkFlow.SermonDetails)
+                    {
+                        <div>@line</div>
+                    }
+                </div>
+            </div>
+            <div style="height:250px;">
+                <div class="sectionTitleContainer">
+                    <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                    <div class="sectionTitle">
+                        宣道會會徽－四重福音
+                    </div>
+                </div>
+                <div style="clear:both;">
+                    <div>
+                        宣道會初創時，即已開始用十字架、洗濯盆、油瓶，和冠冕，來象徵基督福音的完備性。
+                    </div>
+                </div>
+                <div style="clear:both;margin-top:6px;">
+                    <div>
+                        <div style="display:inline-block;float:left;width:100px;padding-left:4px;padding-top:10px;"><img src="http://cafebistro.ca/S3/EnFuBlackLogo.png" style="width:80px;" /></div>
+                        <div style="display:inline-block;float:left;width:300px;padding:4px;border:1px solid black;font-size:16px;border-top-left-radius:10px;border-bottom-right-radius:10px;font-weight:normal;">
+                            <ul style="">
+                                <li>
+                                    十字架－象徵基督的死與復活作成每個信徒的救恩
+                                </li>
+                                <li>
+                                    洗濯盆－象徵基督使我們成聖的恩典，使我們每日靠內住聖靈的能力從罪中得潔淨
+                                </li>
+                                <li>
+                                    油　瓶－象徵聖靈的生命與肉身的醫治　　　　藉著信徒對神話語的順服而領受
+                                </li>
+                                <li>
+                                    冠　冕－象徵萬王之王、萬主之主的基督之再來，
+                                    和那些分享基督榮耀的信徒所獲得的獎賞
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pageSection">
+            <div class="section" id="section1">
+                <div>
+                    <div class="divMainLogo" style="display:inline-block;float:left;min-width:100px;width:100px;max-width:100px;padding-left:5px;"><img src="http://cafebistro.ca/S3/EnFuLogo.png" style="width:90px;" /></div>
+                    <div style="display:inline-block;float:left;padding-top:5px;padding-bottom:5px;font-size:46px;font-weight:bold;text-align:center;">
+                        <div>西岛华人</div>
+                        <div>宣道会恩福堂</div>
+                        <div style="font-size:16px;text-align:right;">West Island Chinese Alliance Church</div>
+                    </div>
+                </div>
+                <div style="clear:both;background-color:#C6D9F1;width:100%;height:50px;font-size:24px;margin-top:10px;">
+                    <div style="display:inline-block;float:left;width:120px;height:50px;background-color:#558ED5;">
+                        <div style="padding:12px 18px 6px 12px;text-align:center;margin:0 auto;color:white;">@Model.CurrentYear 年</div>
+                    </div>
+                    <div style="display:inline-block;float:left;width: 0; height: 0; border-top: 24px solid transparent; border-bottom: 24px solid transparent;border-left: 24px solid #558ED5;">
+                    </div>
+                    <div style="display:inline-block;float:left;height:50px;width:250px;">
+                        <div style="padding:12px 18px 6px 12px;text-align:center;margin:0 auto;width:300px;font-size:28px;font-weight:bolder;">全教會靈修進度</div>
+                    </div>
+                </div>
+                <div style="clear:both;height:245px;border-bottom:1px solid black;margin-top:10px;">
+                    <table class="tbl-bible-reading">
+                        <tr style="border-bottom:1px solid black;">
+                            <th style="width:15%;margin:0;border-bottom:1px solid black;">日期</th>
+                            <th style="width:35%;margin:0;border-bottom:1px solid black;border-right:1px solid black;">章节</th>
+                            <th style="width:15%;margin:0;border-bottom:1px solid black;">日期</th>
+                            <th style="width:35%;margin:0;border-bottom:1px solid black;">章节</th>
+                        </tr>
+                        @for (int i = 0; i < 7; i++)
+                        {
+                            if (i < Model.BibleReadings.Count)
+                            {
+                                <tr>
+                                    <td>
+                                        <div>@Model.BibleReadings[i].BibleReadingDate.ToString("MM/dd")</div>
+                                    </td>
+                                    <td style="border-right:1px solid black;">
+                                        <div>@Model.BibleReadings[i].BibleReadingChaptor @Model.BibleReadings[i].BibleReadingSection</div>
+                                    </td>
+                                    <td>
+                                        <div>@Model.BibleReadings[i + 7].BibleReadingDate.ToString("MM/dd")</div>
+                                    </td>
+                                    <td>
+                                        <div>@Model.BibleReadings[i + 7].BibleReadingChaptor @Model.BibleReadings[i].BibleReadingSection</div>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>
+                                        <div></div>
+                                    </td>
+                                    <td>
+                                        <div></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div></div>
+                                    </td>
+                                    <td>
+                                        <div></div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+                <div>
+                    <table style="font-size:20px;padding-top:5px;">
+                        <tr>
+                            <td colspan="3" style="font-size:26px;text-align:left;font-weight:bold;">长老团队</td>
+                        </tr>
+                        <tr style="font-size:18px;text-align:left;">
+                            <td>
+                                <div>张&nbsp;&nbsp;钧 长老</div>
+                                <div>张春雷 长老</div>
+                                <div>刘会友 长老</div>
+                            </td>
+                            <td>
+                                <div>宣教，财务，青少</div>
+                                <div>总务，儿童</div>
+                                <div>崇拜，关顾</div>
+                            </td>
+                            <td>
+                                <div>514-575-2051</div>
+                                <div>514-623-6201</div>
+                                <div>514-476-1618</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="font-size:18px;margin-top:4px;">
+                    <div style="font-size:30px;font-weight:bold;">教会信息</div>
+                    <div style="padding:2px 0;">
+                        <div style="display:inline-block;float:left;width:120px;">开堂日期</div>
+                        <div style="display:inline-block;float:left;width:300px;">2000年6月11日</div>
+                    </div>
+                    <div style="padding:2px 0;">
+                        <div style="display:inline-block;float:left;width:120px;">教会电话</div>
+                        <div style="display:inline-block;float:left;width:300px;">514-806-9198</div>
+                    </div>
+                    <div style="padding:2px 0;">
+                        <div style="display:inline-block;float:left;width:120px;">教会地址</div>
+                        <div style="display:inline-block;float:left;width:300px;">310 Brookhaven Avenue, Dorval　H9S2N7</div>
+                    </div>
+                    <div style="padding:2px 0;">
+                        <div style="display:inline-block;float:left;width:120px;">教会邮箱</div>
+                        <div style="display:inline-block;float:left;width:300px;">enfutang@gmail.com</div>
+                    </div>
+                    <div style="padding:2px 0;">
+                        <div style="display:inline-block;float:left;width:120px;">教会网址</div>
+                        <div style="display:inline-block;float:left;width:300px;">http://www.enfualliance.org/</div>
+                    </div>
+                </div>
+                <div style="clear:both;font-size:16px;padding-top:10px;">
+                    <div style="display:inline-block;float:left;width:300px;text-align:right;padding-top:16px;">
+                        <br />
+                        恩福堂官网
+                    </div>
+                    <div style="display:inline-block;float:left;width:100px;"><img src="http://cafebistro.ca/S3/EnFuScanCode.png" style="width:80px;" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="page-break-after:always;"></div>
+    <div class="pageBody">
+        <div class="pageSection">
+            <div class="section" id="section2" style="height:500px;">
+                <div class="sectionTitleContainer">
+                    <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                    <div class="sectionTitle">主日崇拜程序</div>
+                </div>
+                <div>
+                    <table class="tableChangeColor" style="clear:both;font-size:12px;">
+                        <tr>
+                            <td style="width:15%;">宣召</td>
+                            <td style="width:65%;">
+                                <div>@Model.WorkFlow.CallDetail - @Model.WorkFlow.CallChaptor</div>
+                            </td>
+                            <td style="width:20%;">
+                                主席
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                同唱
+                            </td>
+                            <td>
+                                主在圣殿中
+                            </td>
+                            <td>
+                                众立
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                诗歌
+                            </td>
+                            <td>
+                                <ul style="margin-left:24px;list-style:decimal;padding:0;">
+                                    @foreach (var item in Model.WorkFlow.WorshipSongs)
+                                    {
+                                        <li style="padding:0;">@item.Name</li>
+                                    }
+                                </ul>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                祷告
+                            </td>
+                            <td></td>
+                            <td>
+                                主席
+                            </td>
+                        </tr>
+                        @if (Model.WorkFlow.IsEucharist == true)
+                        {
+                            <tr>
+                                <td>
+                                    圣餐
+                                </td>
+                                <td></td>
+                                <td>
+                                    @Model.WorkFlow.EucharistOperator
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>
+                                读经
+                            </td>
+                            <td>
+                                @Model.WorkFlow.BibleReading
+                            </td>
+                            <td>
+                                主席/会众
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                讲道
+                            </td>
+                            <td>
+                                @Model.WorkFlow.SermonTitle
+                            </td>
+                            <td>
+                                @Model.WorkFlow.SermonSpeaker
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                本周金句
+                            </td>
+                            <td>
+                                <div>
+                                    @Model.WorkFlow.BibleWeeklyChaptorDetail
+                                    - @Model.WorkFlow.BibleWeeklyChaptor
+                                </div>
+                            </td>
+                            <td>
+                                主席/会众
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                奉献
+                            </td>
+                            <td>
+                                <div>
+                                    @Model.WorkFlow.DonationWeeklyChaptorDetail
+                                    - @Model.WorkFlow.DonationWeeklyChaptor
+                                </div>
+                            </td>
+                            <td>
+                                主席
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                颂赞
+                            </td>
+                            <td>
+                                三一颂
+                            </td>
+                            <td>
+                                众立
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                祝祷
+                            </td>
+                            <td></td>
+                            <td>
+                                @Model.WorkFlow.SermonSpeaker
+                            </td>
+                        </tr>
+                        @if (Model.WorkFlow.IsWitness == true)
+                        {
+                            <tr>
+                                <td>
+                                    受洗见证
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>
+                                家事报告
+                            </td>
+                            <td></td>
+                            <td>
+                                主席
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="section">
+                <div class="sectionTitleContainer">
+                    <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                    <div class="sectionTitle">主日事奉團隊</div>
+                </div>
+                <div style="clear:both;">
+                    <table style="font-size:12px;border-spacing:0;" class="sundayServe">
+                        <tr>
+                            <td style="width:10%;border-bottom:1px solid grey;"></td>
+                            <td style="width:30%;border-bottom:1px solid grey;">@Model.CurrentSundayDate</td>
+                            <td style="width:30%;border-bottom:1px solid grey;">@Model.NextSundayDate</td>
+                            <td style="width:30%;border-bottom:1px solid grey;">@Model.Next2SundayDate</td>
+                        </tr>
+                        <tr>
+                            <td>讲员</td>
+                            <td>@Model.CurrentSundayServe.SundayServeSpeaker.SundayServeName</td>
+                            <td>@Model.NextSundayServe.SundayServeSpeaker.SundayServeName</td>
+                            <td>@Model.Next2WeeksSundayServe.SundayServeSpeaker.SundayServeName</td>
+                        </tr>
+                        <tr>
+                            <td>主席</td>
+                            <td>@Model.CurrentSundayServe.SundayServeChairmen.SundayServeName</td>
+                            <td>@Model.NextSundayServe.SundayServeChairmen.SundayServeName</td>
+                            <td>@Model.Next2WeeksSundayServe.SundayServeChairmen.SundayServeName</td>
+                        </tr>
+                        <tr>
+                            <td>领诗</td>
+                            <td>@Model.CurrentSundayServe.SundayServeWorshipName.SundayServeName</td>
+                            <td>@Model.NextSundayServe.SundayServeWorshipName.SundayServeName</td>
+                            <td>@Model.Next2WeeksSundayServe.SundayServeWorshipName.SundayServeName</td>
+                        </tr>
+                        <tr>
+                            <td>司琴</td>
+                            <td>@Model.CurrentSundayServe.SundayServePanio.SundayServeName</td>
+                            <td>@Model.NextSundayServe.SundayServePanio.SundayServeName</td>
+                            <td>@Model.Next2WeeksSundayServe.SundayServePanio.SundayServeName</td>
+                        </tr>
+                        <tr>
+                            <td>音响</td>
+                            <td>@Model.CurrentSundayServe.SundayServeSound.SundayServeName</td>
+                            <td>@Model.NextSundayServe.SundayServeSound.SundayServeName</td>
+                            <td>@Model.Next2WeeksSundayServe.SundayServeSound.SundayServeName</td>
+                        </tr>
+                        <tr>
+                            <td>司事</td>
+                            <td>@Model.CurrentSundayServe.SundayServeSecretary.SundayServeName</td>
+                            <td>@Model.NextSundayServe.SundayServeSecretary.SundayServeName</td>
+                            <td>@Model.Next2WeeksSundayServe.SundayServeSecretary.SundayServeName</td>
+                        </tr>
+                        <tr>
+                            <td>后勤</td>
+                            <td>@Model.CurrentSundayServe.SundayServeLogistics.SundayServeName</td>
+                            <td>@Model.NextSundayServe.SundayServeLogistics.SundayServeName</td>
+                            <td>@Model.Next2WeeksSundayServe.SundayServeLogistics.SundayServeName</td>
+                        </tr>
+                        <tr>
+                            <td>财务</td>
+                            <td>@Model.CurrentSundayServe.SundayServeAccounting.SundayServeName</td>
+                            <td>@Model.NextSundayServe.SundayServeAccounting.SundayServeName</td>
+                            <td>@Model.Next2WeeksSundayServe.SundayServeAccounting.SundayServeName</td>
+                        </tr>
+                        <tr>
+                            <td>儿主</td>
+                            <td>@Model.CurrentSundayServe.SundayServeChildTeacher.SundayServeName</td>
+                            <td>@Model.NextSundayServe.SundayServeChildTeacher.SundayServeName</td>
+                            <td>@Model.Next2WeeksSundayServe.SundayServeChildTeacher.SundayServeName</td>
+                        </tr>
+                        <tr>
+                            <td>青少</td>
+                            <td>@Model.CurrentSundayServe.SundayServeTeenTeacher.SundayServeName</td>
+                            <td>@Model.NextSundayServe.SundayServeTeenTeacher.SundayServeName</td>
+                            <td>@Model.Next2WeeksSundayServe.SundayServeTeenTeacher.SundayServeName</td>
+                        </tr>
+                        <tr>
+                            <td style="border-bottom:2px solid grey;">新人</td>
+                            <td style="border-bottom:2px solid grey;">@Model.CurrentSundayServe.SundayServeNewPerson.SundayServeName</td>
+                            <td style="border-bottom:2px solid grey;">@Model.NextSundayServe.SundayServeNewPerson.SundayServeName</td>
+                            <td style="border-bottom:2px solid grey;">@Model.Next2WeeksSundayServe.SundayServeNewPerson.SundayServeName</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="pageSection">
+            <div class="section" id="section3" style="height:520px;">
+                <div class="sectionTitleContainer">
+                    <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                    <div class="sectionTitle">家事报告</div>
+                </div>
+                <div style="clear:both;height:500px;">
+                    <ul>
+                        @foreach (var item in Model.Events)
+                        {
+                            if (!string.IsNullOrWhiteSpace(item.EventName) && !string.IsNullOrWhiteSpace(item.EventDesc))
+                            {
+                                <li style="padding:2px;">
+                                    <div style="font-weight:bolder;">
+                                        [@item.EventName]
+                                    </div>
+                                    <div>
+                                        @item.EventDesc
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="section" id="section3">
+                <div class="sectionTitleContainer">
+                    <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                    <div class="sectionTitle">代禱事項</div>
+                </div>
+                <div style="clear:both;">
+                    <ul style="list-style:decimal;margin-left:16px;padding:0;">
+                        @foreach (var item in Model.PrayEvents)
+                        {
+                            if (!string.IsNullOrWhiteSpace(item.PrayMatterDesc))
+                            {
+                                <li style="margin:0;padding:2px;">
+                                    <div>
+                                        @item.PrayMatterDesc
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="pageSection">
+            <div class="section" id="section4">
+                <div class="sectionTitleContainer">
+                    <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                    <div class="sectionTitle">
+                        聚會时间表
+                    </div>
+                </div>
+                <div style="clear:both;height:270px;">
+                    <table class="tableChangeColor" style="font-size:12px;">
+                        <tr>
+                            <th style="width:28%;border-bottom:1px solid black;">聚会</th>
+                            <th style="width:24%;border-bottom:1px solid black;">时间</th>
+                            <th style="width:20%;border-bottom:1px solid black;">负责同工</th>
+                            <th style="width:28%;border-bottom:1px solid black;">电话</th>
+                        </tr>
+                        @foreach (var item in Model.Teams)
+                        {
+                            <tr>
+                                <td>@item.TeamName</td>
+                                <td>@item.TeamDate</td>
+                                <td>@item.TeamLeaderName</td>
+                                <td>@item.TeamPhone</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div class="sectionTitleContainer">
+                    <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                    <div class="sectionTitle">
+                        聚會人數 <span style="font-size:19px;">（@Model.Last2WeeksSundayDate-@Model.Last2WeeksSaturdayDate）</span>
+                    </div>
+                </div>
+                <div style="clear:both;">
+                    <table class="tableChangeColor" style="font-size:14px;">
+                        <tr>
+                            <td colspan="4">
+                                主日崇拜（@Model.LastSundayDate）
+                                成人 @Model.AdultGroupMeeting.GroupMeetingNumber
+                                青少年 @Model.TeenGroupMeeting.GroupMeetingNumber
+                                儿童 @Model.ChildrenGroupMeeting.GroupMeetingNumber
+                                总共 @Model.LastSundayPeopleNumber 人
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:33%;text-align:left;">
+                                @Model.PrayGroupMeeting.GroupMeetingType
+                                <span>
+                                    @if (Model.PrayGroupMeeting.GroupMeetingNumber > 0)
+                                    {
+                                        <span>@Model.PrayGroupMeeting.GroupMeetingNumber</span>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </span>
+                            </td>
+                            <td style="width:33%;text-align:left;">
+                                @Model.SundayPrayGroupMeeting.GroupMeetingType
+                                <span>
+                                    @if (Model.SundayPrayGroupMeeting.GroupMeetingNumber > 0)
+                                    {
+                                        <span>@Model.SundayPrayGroupMeeting.GroupMeetingNumber</span>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </span>
+                            </td>
+                            <td style="width:33%;text-align:left;">
+                                @Model.BibleReadingGroupMeeting.GroupMeetingType
+                                <span>
+                                    @if (Model.BibleReadingGroupMeeting.GroupMeetingNumber > 0)
+                                    {
+                                        <span>@Model.BibleReadingGroupMeeting.GroupMeetingNumber</span>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </span>
+                            </td>
+                        </tr>
+                        @{
+                            for (int i = 0; i < Model.TeamGroupMeetings.Count; i++)
+                            {
+                                <tr>
+                                    <td style="width:33%;text-align:left;">
+                                        @if (i < Model.TeamGroupMeetings.Count)
+                                        {
+                                            <span>@Model.TeamGroupMeetings[i].GroupMeetingType</span>
+                                            if (Model.TeamGroupMeetings[i].GroupMeetingNumber > 0)
+                                            {
+                                                <span>@Model.TeamGroupMeetings[i].GroupMeetingNumber </span>
+                                            }
+                                            else
+                                            {
+                                                <span>-</span>
+                                            }
+                                            i++;
+                                        }
+                                    </td>
+                                    <td style="width:33%;text-align:left;">
+                                        @if (i < Model.TeamGroupMeetings.Count)
+                                        {
+                                            <span>@Model.TeamGroupMeetings[i].GroupMeetingType</span>
+                                            if (Model.TeamGroupMeetings[i].GroupMeetingNumber > 0)
+                                            {
+                                                <span>@Model.TeamGroupMeetings[i].GroupMeetingNumber </span>
+                                            }
+                                            else
+                                            {
+                                                <span>-</span>
+                                            }
+                                            i++;
+                                        }
+                                    </td>
+                                    <td style="width:33%;text-align:left;">
+                                        @if (i < Model.TeamGroupMeetings.Count)
+                                        {
+                                            <span>@Model.TeamGroupMeetings[i].GroupMeetingType</span>
+                                            if (Model.TeamGroupMeetings[i].GroupMeetingNumber > 0)
+                                            {
+                                                <span>@Model.TeamGroupMeetings[i].GroupMeetingNumber </span>
+                                            }
+                                            else
+                                            {
+                                                <span>-</span>
+                                            }
+                                            i++;
+                                        }
+                                    </td>
+                                </tr>
+                                i--;
+                            }
+                        }
+
+                    </table>
+                </div>
+                <div class="sectionTitleContainer" style="clear:both;margin-top:20px;">
+                    <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                    <div class="sectionTitle">
+                        主日奉獻
+                    </div>
+                </div>
+                <div style="clear:both;">
+                    <table class="tableChangeColor" style="font-size:14px;">
+                        <tr>
+                            <td style="width:28%;"></td>
+                            <td style="width:12%;">常费</td>
+                            <td style="width:12%;">建堂</td>
+                            <td style="width:12%;">差传</td>
+                            <td style="width:12%;">欢欢</td>
+                            <td style="width:12%;">感恩</td>
+                            <td style="width:12%;">其他</td>
+                        </tr>
+                        <tr>
+                            <td>@Model.LastSundayDate</td>
+                            <td>
+                                @if (Model.SundayDonate.RegularDonate > 0)
+                                {<span>$@Model.SundayDonate.RegularDonate.ToString("F0")</span>}
+                            </td>
+                            <td>
+                                @if (Model.SundayDonate.BuildChurchDonate > 0)
+                                {<span>$@Model.SundayDonate.BuildChurchDonate.ToString("F0")</span>}
+                            </td>
+                            <td>
+                                @if (Model.SundayDonate.SpreadDonate > 0)
+                                {<span>$@Model.SundayDonate.SpreadDonate.ToString("F0")</span>}
+                            </td>
+                            <td>
+                                @if (Model.SundayDonate.HuanHuanDonate > 0)
+                                {<span>$@Model.SundayDonate.HuanHuanDonate.ToString("F0")</span>}
+                            </td>
+                            <td>
+                                @if (Model.SundayDonate.ThankGivingDonate > 0)
+                                {<span>$@Model.SundayDonate.ThankGivingDonate.ToString("F0")</span>}
+                            </td>
+                            <td>
+                                @if (Model.SundayDonate.OtherDonate > 0)
+                                {<span>$@Model.SundayDonate.OtherDonate.ToString("F0")</span>}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@Model.LastSundayDate.Split(new[] { "月" }, StringSplitOptions.None)[0] 月累積</td>
+                            <td>
+                                @if (Model.MonthlyDonate.MonthlyRegularDonate > 0)
+                                {<span>$@Model.MonthlyDonate.MonthlyRegularDonate.ToString("F0")</span>}
+                            </td>
+                            <td>
+                                @if (Model.MonthlyDonate.MonthlyBuildChurchDonate > 0)
+                                {<span>$@Model.MonthlyDonate.MonthlyBuildChurchDonate.ToString("F0")</span>}
+                            </td>
+                            <td>
+                                @if (Model.MonthlyDonate.MonthlySpreadDonate > 0)
+                                {<span>$@Model.MonthlyDonate.MonthlySpreadDonate.ToString("F0")</span>}
+                            </td>
+                            <td>
+                                @if (Model.MonthlyDonate.MonthlyHuanHuanDonate > 0)
+                                {<span>$@Model.MonthlyDonate.MonthlyHuanHuanDonate.ToString("F0")</span>}
+                            </td>
+                            <td>
+                                @if (Model.MonthlyDonate.MonthlyThankGivingDonate > 0)
+                                {<span>$@Model.MonthlyDonate.MonthlyThankGivingDonate.ToString("F0")</span>}
+                            </td>
+                            <td>
+                                @if (Model.MonthlyDonate.MonthlyOtherDonate > 0)
+                                {<span>$@Model.MonthlyDonate.MonthlyOtherDonate.ToString("F0")</span>}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="clear:both;margin-top:10px;">
+                    <table class="tableChangeColor" style="font-size:18px;display:inline-block;float:right;width:50%;border:1px solid black;">
+                        <tr>
+                            <td style="width:30%;text-align:center;">@Model.LastSundayDate.Split(new[] { "月" }, StringSplitOptions.None)[0] 月总奉献</td>
+                            <td style="width:10%;text-align:center;">$@Model.MonthDonate.ToString("#")</td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;text-align:center;">每月總預算</td>
+                            <td style="width:10%;text-align:center;">$@Model.MonthBudget.ToString("#.##")</td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;text-align:center;">百分比</td>
+                            <td style="width:10%;text-align:center;">@Model.MonthDonatePercentage.ToString("P0")</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

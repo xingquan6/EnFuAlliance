@@ -1,0 +1,44 @@
+﻿@model EnFu.Models.EventListViewModel
+<h2>家事报告 (@Model.EventList.FirstOrDefault().EventDateTime.ToString("yyyy-MM-dd"))</h2>
+<p>如果没有内容，会复制上个星期的内容</p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <hr />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="保存家事报告" class="btn btn-success" />
+        </div>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @if (Model != null && Model.EventList != null && Model.EventList.Count > 0)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            <div class="form-group">
+                <div class="col-md-2" style="text-align:right;">@(i + 1): &nbsp; @Html.LabelFor(model => model.EventList[i].EventName, htmlAttributes: new { @class = "control-label" })</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EventList[i].EventName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EventList[i].EventName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.EventList[i].EventDesc, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.EventList[i].EventDesc, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EventList[i].EventDesc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.EventList[i].EventId)
+            @Html.HiddenFor(model => model.EventList[i].EventDateTime)
+        }
+    }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="保存家事报告" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+

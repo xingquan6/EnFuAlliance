@@ -1,0 +1,13 @@
+body {
+	font-size: 60px;
+    height: 100%;
+}
+
+.bibleSection {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+    padding: 10px;
+}
+

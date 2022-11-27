@@ -1,0 +1,66 @@
+﻿@model EnFu.Models.DownloadDocumentViewModel
+<div>
+    <div class="form-group col-md-12" style="clear:both;">
+        <form method="POST" name="postform" id="frmPrintPdf" action="/Document/DownloadPdf/">
+            <div class="form-group input-group-md col-md-12" style="padding-top:20px;font-size:1.25em;">
+                <div class="form-group input-group-md col-md-3">
+                    选择周报日期
+                </div>
+                <div class="form-group input-group-md col-md-3">
+                    @Html.DropDownListFor(m => m.SundayDate,
+                                        new SelectList(EnFu.Modules.Enums.SundayReportConst.GetSundayList()),
+                                        new { @class = "form-control" })
+                </div>
+                <div class="form-group input-group-md col-md-3">
+                    @Html.DropDownListFor(m => m.Type,
+                                        new SelectList(EnFu.Modules.Enums.SundayReportConst.GetReportTypes(), "Value", "Text"),
+                                        new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group input-group-md col-md-12" style="padding-top:20px;font-size:1.25em;">
+                <div class="form-group input-group-md col-md-2" style="padding-top:20px;font-size:1.25em;">
+                    <button class="btn btn-success" type="submit">生成周报</button>
+                </div>
+            </div>
+        </form>
+        <form method="POST" name="postform" id="frmPrintPdf" action="/Document/DownloadBiblePdf/">
+            <div class="form-group input-group-md col-md-12" style="padding-top:20px;font-size:1.25em;">
+                <div class="form-group input-group-md col-md-3">
+                    选择读经日期
+                </div>
+                <div class="form-group input-group-md col-md-3">
+                    @Html.DropDownListFor(m => m.SundayDate,
+                                        new SelectList(EnFu.Modules.Enums.BibleReadingConst.GetDateList()),
+                                        new { @class = "form-control" })
+                </div>
+                <div class="form-group input-group-md col-md-3">
+                    @Html.DropDownListFor(m => m.Type,
+                                        new SelectList(EnFu.Modules.Enums.SundayReportConst.GetVerseSNs(), "Value", "Text"),
+                                        new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group input-group-md col-md-12" style="padding-top:20px;font-size:1.25em;">
+                <div class="form-group input-group-md col-md-2" style="padding-top:20px;font-size:1.25em;">
+                    <button class="btn btn-success" type="submit">生成读经文件</button>
+                </div>
+            </div>
+        </form>
+        <form method="POST" name="postform" id="frmPrintPdf" action="/Document/DownloadBibleMonthPdf/">
+            <div class="form-group input-group-md col-md-12" style="padding-top:20px;font-size:1.25em;">
+                <div class="form-group input-group-md col-md-3">
+                    选择每月读经日期
+                </div>
+                <div class="form-group input-group-md col-md-3">
+                    @Html.DropDownListFor(m => m.SundayDate,
+                                        new SelectList(EnFu.Modules.Enums.BibleReadingConst.GetYearMonthList()),
+                                        new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group input-group-md col-md-12" style="padding-top:20px;font-size:1.25em;">
+                <div class="form-group input-group-md col-md-2" style="padding-top:20px;font-size:1.25em;">
+                    <button class="btn btn-success" type="submit">生成每月读经文件</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

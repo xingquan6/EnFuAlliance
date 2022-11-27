@@ -1,0 +1,1180 @@
+﻿@model EnFu.Models.SundayReportPdfViewModel
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+    body {
+        font-size: 56px;
+    }
+
+    div {
+        font-size: 56px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .divLeftBlock {
+        display: inline-block;
+        float: left;
+    }
+
+    .pageBody {
+        background-color: white;
+        font-family: arial;
+        margin-top: 20px;
+        height: 5000px;
+    }
+
+    .section {
+        padding: 5px;
+        margin-top: 40px;
+        clear: both;
+        font-size:64px;
+        /*height: 1190px;*/
+    }
+
+    .sectionTitleContainer {
+        height: 110px;
+    }
+
+    .blueLogo {
+        width: 0;
+        height: 0;
+        border-bottom: 80px solid transparent;
+        border-left: 80px solid #0070C0;
+    }
+
+    .blueLogoContainer {
+        height: 80px;
+        width: 80px;
+        display: inline-block;
+        float: left;
+    }
+
+    .sectionTitle {
+        height: 80px;
+        width: 700px;
+        display: inline-block;
+        float: left;
+        text-align: left;
+        font-size: 60px;
+        font-weight: bold;
+        padding-left: 20px;
+        padding-top: 10px;
+    }
+
+    table {
+        width: 100%;
+        font-size: 56px;
+    }
+
+        table tr td {
+            text-align: left;
+            padding: 5px;
+            font-size: 52px;
+        }
+
+    .tableChangeColor {
+        font-size: 30px;
+    }
+
+        .tableChangeColor tr:nth-child(even) {
+            background: #FFFFFF;
+        }
+
+        .tableChangeColor tr:nth-child(odd) {
+            background: #DCE6F2;
+        }
+
+        .tableChangeColor tr td {
+            text-align: center;
+        }
+
+            .tableChangeColor tr td:nth-child(2) {
+                text-align: left;
+            }
+    .workflow {
+        font-size: 64px;
+    }
+    .workflow tr {
+        font-size: 64px;
+    }
+        .workflow tr td{
+            font-size: 64px;
+        }
+    ul {
+        margin: 0;
+        padding: 5px;
+        list-style: none;
+    }
+
+        ul li {
+            text-align: left;
+            padding: 5px;
+        }
+
+    .tbl-bible-reading {
+        text-align: center;
+        padding-top: 20px;
+        font-size: 56px;
+        display: inline-block;
+        float: left;
+        width: 100%;
+        border-bottom: 2px solid black;
+    }
+
+        .tbl-bible-reading tr td {
+            text-align: center;
+            padding: 10px;
+            border-bottom: 1px solid lightgray;
+        }
+
+    .sundayServe tr td {
+        text-align: center;
+        font-size: 64px;
+    }
+</style>
+<div class="pageBody">
+    <div class="section">
+        <div style="margin-top:50px;">
+            <div style="display:inline-block;float:left;width:160px;padding-left:20px;"><a target="_blank" href="http://www.enfualliance.org/" style="font-size:140px;"><img src="data:image/png;base64,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" style="width:140px;" /></a></div>
+            <div style="display:inline-block;float:left;width:800px;padding-top:20px;font-size:70px;text-align:center;">
+                <div>西岛华人宣道会恩福堂</div>
+                <div style="font-size:40px;text-align:right;">West Island Chinese Alliance Church</div>
+                <div style="font-size:66px;text-align:right;">2022 扎根真道 多结义果</div>
+            </div>
+        </div>
+        <div style="clear:both;background-color:#C6D9F1;width:100%;height:100px;font-size: 60px;">
+            <div style="display:inline-block;float:left;width:300px;height:100px;background-color:#558ED5;">
+                <div style="padding: 10px; text-align: center; margin: 0 auto; color: white;">@Model.CurrentYear 年</div>
+            </div>
+            <div style="display:inline-block;float:left;width: 0; height: 0; border-top: 50px solid transparent; border-bottom: 50px solid transparent;border-left: 50px solid #558ED5;">
+            </div>
+            <div style="display:inline-block;float:left;height:100px;">
+                <div style="padding:20px;text-align:center;margin:0 auto;width:500px;">全教会灵修进度</div>
+            </div>
+        </div>
+        <div style="height:auto;border-bottom:1px solid black;">
+            <table class="tbl-bible-reading">
+                <tr>
+                    <th style="border-bottom:1px solid black;">日期</th>
+                    <th style="border-bottom:1px solid black;">章节</th>
+                </tr>
+                @for (int i = 0; i < 14; i++)
+                {
+                    if (i < Model.BibleReadings.Count)
+                    {
+                        @*<tr>
+                    <td><div>@Model.BibleReadings[i].ViewModels[0].BibleReadingDate.ToString("MM/dd")</div></td>
+                    <td>
+                        <div style="text-align:left;padding:20px;">
+                            <div style="width:25%;display:inline-block;float:left;padding-top:30px;">
+                                <a href="#bible-reading-@i">@Model.BibleReadings[i].ViewModels[0].BibleReadingChaptor</a>
+                            </div>
+                            <div style="width:73%;display:inline-block;float:left;">
+                                @for (int j = 0; j < Model.BibleReadings[i].ViewModels.Count; j++)
+                                {
+                                    <div>
+                                        <div style="width:55%;display:inline-block;float:left;padding-top:30px;"><a href="#bible-reading-@i">@Model.BibleReadings[i].ViewModels[j].ChapterSN: @Model.BibleReadings[i].ViewModels[j].VerseSNFrom - @Model.BibleReadings[i].ViewModels[j].VerseSNTo</a></div>
+                                        <div style="width:30%;display:inline-block;float:left;padding-top:30px;"><a href="@Model.BibleReadings[i].ViewModels[j].Url">注解</a></div>
+                                        <div style="width:15%;display:inline-block;float:left;">
+                                            <a href="@Model.BibleReadings[i].ViewModels[j].Audio">
+                                                <img style="min-height: 100px; min-width: 100px;" src="data:image/png;base64,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" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </td>
+                </tr>*@
+                        <tr>
+                            <td colspan="2">
+                                <div style="padding-top: 20px; font-size: 80px;">
+                                    @Model.BibleReadings[i].ViewModels[0].BibleReadingDate.ToString("MM") 月
+                                    @Model.BibleReadings[i].ViewModels[0].BibleReadingDate.ToString("dd") 日
+                                </div>
+                                <div style="text-align: left; padding: 20px;">
+                                    @for (int j = 0; j < Model.BibleReadings[i].ViewModels.Count; j++)
+                                    {
+                                        <div style="width:25%;display:inline-block;float:left;padding-top:65px;">
+                                            <a href="#bible-reading-@i">@Model.BibleReadings[i].ViewModels[j].BibleReadingChaptor</a>
+                                        </div>
+                                        <div style="width:70%;display:inline-block;float:left;">
+                                            <div>
+                                                <div style="width:55%;display:inline-block;float:left;padding-top:65px;"><a href="#bible-reading-@i">@Model.BibleReadings[i].ViewModels[j].ChapterSN: @Model.BibleReadings[i].ViewModels[j].VerseSNFrom - @Model.BibleReadings[i].ViewModels[j].VerseSNTo</a></div>
+                                                <div style="width: 30%; display: inline-block; float: left; padding-top: 50px; font-size: 80px;"><a href="@Model.BibleReadings[i].ViewModels[j].Url">注解</a></div>
+                                                <div style="width: 15%; display: inline-block; float: left;">
+                                                    <a href="@Model.BibleReadings[i].ViewModels[j].Audio" style="display:block;width:150px;height:150px;padding-top:-20px;margin-top:20px;margin-bottom:20px;">
+                                                        <img style="min-height: 150px; min-width: 150px;" src="data:image/png;base64,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" />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+        <div>
+            <table style="padding-top:20px;font-size: 48px;">
+                <tr>
+                    <td style="font-size:60px;text-align:left;font-weight:bold;">主任牧师</td>
+                    <td>
+                        <div style="padding-top:10px;padding-bottom:10px;">孙清顺牧师</div>
+                    </td>
+                    <td>
+                        <div style="padding-top:10px;padding-bottom:10px;"><a href="tel:1-514-806-9198">514-806-9198</a></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="font-size:60px;text-align:left;font-weight:bold;">长老团队</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>刘会友长老</div>
+                        <div>胡海涛长老</div>
+                        <div>郑群长老</div>
+                    </td>
+                    <td>
+                        <div>关顾/司事/儿主</div>
+                        <div>崇拜/教育/青少年</div>
+                        <div>宣教/后勤/财务</div>
+                    </td>
+                    <td>
+                        <div><a href="tel:1-514-476-1618">514-476-1618</a></div>
+                        <div><a href="tel:1-514-632-5558">514-632-5558</a></div>
+                        <div><a href="tel:1-514-808-3968">514-808-3968</a></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="margin-top:20px;font-size: 48px;">
+            <div style="font-size:60px;font-weight:bold;">教会信息</div>
+            <div style="padding:10px 0;clear:both;">
+                <div style="display:inline-block;float:left;width:250px;padding-top:10px;">开堂日期</div>
+                <div style="display:inline-block;float:left;width:650px;padding-top:10px;">2000年6月11日</div>
+            </div>
+            <div style="padding:10px 0;clear:both;">
+                <div style="display:inline-block;float:left;width:250px;padding-top:10px;">教会电话</div>
+                <div style="display:inline-block;float:left;width:650px;padding-top:10px;"><a href="tel:1-514-806-9198">514-806-9198</a></div>
+            </div>
+            <div style="padding:10px 0;clear:both;">
+                <div style="display:inline-block;float:left;width:250px;padding-top:10px;">教会地址</div>
+                <div style="display:inline-block;float:left;width:650px;padding-top:10px;">
+                    <a target="_blank" href="https://www.google.com/maps/place/298+Av.+Brookhaven,+Dorval,+QC+H9S+2N4/45.4442565,-73.7712992,17z/data=!3m1!4b1!4m5!3m4!1s0x4cc93debc413cf9f:0xf8fcf68d5c45c462!8m2!3d45.4442565!4d-73.7691105">
+                        298 Av. Brookheven, Dorval, QC, H9S2N4
+                    </a>
+                </div>
+            </div>
+            <div style="padding:10px 0;clear:both;">
+                <div style="display:inline-block;float:left;width:250px;padding-top:10px;">教会邮箱</div>
+                <div style="display:inline-block;float:left;width:650px;padding-top:10px;"><a target="_blank" href="mailto:enfutang@gmail.com">enfutang@gmail.com</a></div>
+            </div>
+            <div style="padding:10px 0;clear:both;">
+                <div style="display:inline-block;float:left;width:250px;padding-top:10px;">教会网址</div>
+                <div style="display:inline-block;float:left;width:650px;padding-top:10px;"><a target="_blank" href="http://www.enfualliance.org/">http://www.enfualliance.org/</a></div>
+            </div>
+            <div style="padding:10px 0;clear:both;">
+                <div style="display:inline-block;float:left;width:250px;padding-top:10px;">网络敬拜</div>
+                <div style="display:inline-block;float:left;width:650px;padding-top:10px;">
+                    <div>Zoom:  ID-5148069198 <a target="_blank" href="https://zoom.us/j/5148069198/">https://zoom.us/j/5148069198/</a></div>
+                    <div>Youtube: <a target="_blank" href="https://www.youtube.com/channel/UC6SMt0-NMkVgiyQ_d523Nfg">https://www.youtube.com/channel/UC6SMt0-NMkVgiyQ_d523Nfg</a></div>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both;font-size:40px;padding-top:50px;">
+            <div style="display:inline-block;float:left;width:400px;text-align:center;padding-top:30px;font-size:50px;">
+                <div style="border: 3px dashed pink;padding:5px;"><a href="#readme">周报功能说明</a></div>
+            </div>
+            <div style="display:inline-block;float:left;width:400px;text-align:right;padding-top:40px;">
+                恩福堂官网
+            </div>
+            <div style="display:inline-block;float:left;width:150px;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHYAAAB2CAMAAAFdfqe1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALZUExURf////z8/Pv7+/7+/v39/TY2Nh0dHSwsLPPz8z09PcfHx7CwsDk5OURERL+/v3p6era2thkZGQAAAA0NDfHx8SAgIKSkpBwcHCgoKGZmZqysrBERESQkJMDAwKampre3t2lpaa2trcTExKurq56ensnJyampqdDQ0FpaWiMjIy4uLllZWSkpKc/Pz93d3Ts7Ozw8PHR0dNfX1z8/Pzo6OnFxcTQ0NEJCQoyMjFRUVIGBgWxsbBUVFRMTE2pqasrKylhYWO3t7U1NTRsbGxcXF+Pj40NDQwUFBeTk5CIiIrS0tA8PD3Z2dnd3d4WFhYiIiNvb29PT09zc3EtLS2RkZJubm87OzsXFxU5OTr6+vszMzHV1dV5eXtHR0dTU1Ly8vOfn55GRkQMDAz4+PkdHR+vr63h4eKKiogsLC/T09H19fTU1NaqqqrW1tfX19QkJCd7e3l9fX+Hh4QEBASoqKt/f3w4ODmdnZyEhIfLy8jIyMnNzc7Kysvf39ysrKzMzM6Wlpbu7u+jo6FFRUbm5uRgYGGFhYdbW1gwMDB8fH0ZGRpSUlK6urjAwMEhISJaWlggICPDw8IKCgubm5gICAurq6tnZ2c3NzVNTU+/v709PT8PDw/r6+mBgYBISErGxsbq6uhoaGiUlJYqKikxMTBQUFI6OjsvLy7Ozs8LCwmJiYhAQEKGhoXBwcPb29oaGhpiYmGVlZdjY2Ozs7Dg4OIODg5eXlwcHBzc3N4mJidXV1enp6Y+Pj4CAgHJycgYGBvj4+O7u7nx8fFJSUm9vb11dXRYWFpOTk0lJSVBQUOLi4goKCnl5edra2uXl5ScnJ729vWtra6Ojo21tbWhoaDExMZWVlaCgoJycnH5+fq+vr6enpwQEBEBAQC8vLx4eHlVVVSYmJo2NjcjIyFZWVi0tLZmZmUFBQdLS0mNjY8HBweDg4FtbW7i4uPn5+cbGxldXV4SEhAAAALmldiIAAADzdFJOU///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AHXY/3wAAAAJcEhZcwAAFxEAABcRAcom8z8AAAtFSURBVFhH7ZlNsqu6DoWZQDr0UsyBedBI0c8YmAPF0JgJrYzjrU+yjE0gO/vUu41766wdwLYkL//IsmE3b2iFoZk6S6V8px/JXa5Hke+2abWU8l3XdPO2rs2gP2HatnszbK/m1TaT8q9XO23tS8rTRr7phXV6Dv3Q9MpSy9BsqzEkdNOeNt771EcJ/EM0hZt+w0sGofADZL4uUqYer6VZSZX5Z9Nb1upH/zHn/DBI/ljbvumURH1ax3a9v7Al3073bniqwqmlvy0jtM5DO7TqsWk0yyg1PaPJ7WMm5/xNszaj+EJKeyS3BnrJiu6u/ju4Ubs2dEnVQuxF6U697TpAB3JREttds789mNO9yO6r/EA/9eD+mGbaSZpCE7ftsjTz0jzX+/Dob8/m1iq7LEq5/PFom8djlP9t6719NOPI5UIpz/Pcyvw+v9ZJzX/ShUZlLrdGqlTcry67rLXRgLzVvAnPjmRCEho0LFMzKYGlWSexpazf7SbvSPp6VOKhncYsyNKkbIP6sMpzmYn/QTgLbSGdGgpsKTo9xYKlvERj4DmzRJhsSa9n0lx3f5BaJqULadxdL0qS1IEs/hwm3d0ppLideZ0wDIMiF6GoVXTRJT9Q0botSMP/tP5vjZxOnjM/5X5EM0Uuzex92pjitnltilxWuQtl7M75UEOaRzsm30xCrXW177XJdLMuWa59TeZu8lr33HlucFp33NvsPWrkk/1AgFOL+6GzS2HyZm1WTXKsTq7XKk5Zll7LzU1oaZ7+Q1mJNJIqIU+BCwNJ6ggbv/L8OqyYZ/o7ek6U5jLgJVamm+Uo0OoopYjcJmnU0lRoCd2iv37HEGGS2ihbCTAJVy6q+vvvgncgsDZd625BHGGTlsJRKffWh8CBLTHUQeC3wlopPFLYq3XbvCEIBW8o9d/aGmqlj7bRXwVtL3bBpW3A+9s0bCOMlWD5Sqmy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" style="width:130px;" /></div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="sectionTitleContainer">
+            <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+            <div class="sectionTitle">主日崇拜程序</div>
+        </div>
+        <div style="clear:both;">
+            <table class="tableChangeColor workflow">
+                <tr>
+                    <td style="width:25%;">宣召</td>
+                    <td style="width:50%;">
+                        <div>@Model.WorkFlow.CallDetail</div>
+                        <div style="text-align:right;">- @Model.WorkFlow.CallChaptor</div>
+                    </td>
+                    <td style="width:25%;">
+                        主席
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        同唱
+                    </td>
+                    <td>
+                        主在圣殿中
+                    </td>
+                    <td>
+                        众立
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        诗歌
+                    </td>
+                    <td>
+                        <ul style="margin-left:80px;list-style:decimal;padding:0;">
+                            <li style="padding:0;margin:15px;"><a href="@Model.WorshipSongServeViewModels[0].Url" style="text-decoration:none;">@Model.WorshipSongServeViewModels[0].Name</a></li>
+                            <li style="padding:0;margin:15px;"><a href="@Model.WorshipSongServeViewModels[1].Url" style="text-decoration:none;">@Model.WorshipSongServeViewModels[1].Name</a></li>
+                            @*<li style="padding:0;margin:15px;"><a href="@Model.WorshipSongServeViewModels[2].Url" style="text-decoration:none;">@Model.WorshipSongServeViewModels[2].Name</a></li>
+                    <li style="padding:0;margin:15px;"><a href="@Model.WorshipSongServeViewModels[3].Url" style="text-decoration:none;">@Model.WorshipSongServeViewModels[3].Name</a></li>*@
+                        </ul>
+                        @*<ul style="margin-left:80px;list-style:decimal;padding:0;">
+                    @foreach (var item in Model.WorshipSongServeViewModels)
+                    {
+                        <li style="padding:0;margin:15px;"><a href="@item.Url" style="text-decoration:none;">@item.Name</a></li>
+                    }
+                </ul>*@
+                    </td>
+                    <td>恩福小诗班​​</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>祷告</td>
+                    <td>主席</td>
+                </tr>
+                <tr>
+                    <td>献诗</td>
+                    <td>《恩典之路》</td>
+                    <td>恩慈小组</td>
+                </tr>
+                @if (Model.WorkFlow.IsEucharist == true)
+                {
+                    <tr>
+                        <td></td>
+                        <td>圣餐</td>
+                        <td>@Model.WorkFlow.EucharistOperator</td>
+                    </tr>
+                }
+                <tr>
+                    <td>
+                        读经
+                    </td>
+                    <td>
+                        @Model.WorkFlow.BibleReading
+                    </td>
+                    <td>
+                        主席/会众
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        讲道
+                    </td>
+                    <td>
+                        @Model.WorkFlow.SermonTitle
+                    </td>
+                    <td>
+                        <a href="@Model.WorkFlow.SermonSpeakerUrl">@Model.WorkFlow.SermonSpeaker</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        本周金句
+                    </td>
+                    <td>
+                        <div>
+                            @Model.WorkFlow.BibleWeeklyChaptorDetail
+                        </div>
+                        <div style="text-align:right;">
+                            - @Model.WorkFlow.BibleWeeklyChaptor
+                        </div>
+                        @*                        <div>
+                    這樣，你們不再作外人和客旅，是與聖徒同國，是神家裡的人了；並且被建造在使徒和先知的根基上，有基督耶穌自己為房角石，
+                </div>
+                <div style="text-align:right;">
+                    - 弗2
+                </div>*@
+                    </td>
+                    <td>
+                        主席/会众
+                    </td>
+                </tr>
+                @if (!string.IsNullOrEmpty(Model.WorkFlow.SermonWorshipSong))
+                {
+                    <tr>
+                        <td>回应诗歌</td>
+                        <td><a href="@Model.WorkFlow.SermonWorshipSongAudioUrl" style="text-decoration:none;">@Model.WorkFlow.SermonWorshipSong</a></td>
+                        <td></td>
+                    </tr>
+                }
+
+                <tr>
+                    <td>
+                        奉献
+                    </td>
+                    <td>
+                        <div>
+                            @Model.WorkFlow.DonationWeeklyChaptorDetail
+                        </div>
+                        <div style="text-align:right;">
+                            - @Model.WorkFlow.DonationWeeklyChaptor
+                        </div>
+                    </td>
+                    <td>
+                        主席
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        献诗
+                    </td>
+                    <td>
+                        耶稣耶稣，献上感恩
+                    </td>
+                    <td>
+                        恩福诗班
+                    </td>
+                </tr>
+                <tr>
+                    <td>洗礼</td>
+                    <td>
+                        崔颖姐妹      林静姐妹    姚雯姐妹
+
+                        石昕姐妹      姜坤姐妹    徐翔弟兄
+
+                        陈小英姐妹  肖玮姐妹    邓辰弟兄
+
+                        盛克敏弟兄  罗莉兰姐妹
+                    </td>
+                    <td>孙清顺牧师</td>
+                </tr>
+                @if (Model.WorkFlow.Witness == true)
+                {
+                    <tr>
+                        <td>
+                            见证
+                        </td>
+                        <td>
+                            肖玮姐妹
+
+                            崔颖姐妹
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td>劝勉</td>
+                    <td>孙清顺牧师</td>
+                </tr>
+                @*                <tr>
+            <td>
+                分享
+            </td>
+            <td>宣教见证</td>
+            <td>
+                饶阳弟兄
+            </td>
+        </tr>*@
+                <tr>
+                    <td>
+                        家事报告
+                    </td>
+                    <td></td>
+                    <td>
+                        主席
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>主祷文</td>
+                    <td>
+                        主席
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        颂赞
+                    </td>
+                    <td>
+                        三一颂
+                    </td>
+                    <td>
+                        众立
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        祝祷
+                    </td>
+                    <td></td>
+                    <td>
+                        @Model.WorkFlow.Blessing
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>福音爱宴</td>
+                    <td></td>
+                </tr>
+                @*                <tr>
+            <td></td>
+            <td>宣教差派汇报</td>
+            <td>刘红梅姐妹</td>
+        </tr>*@
+
+                @*                <tr>
+            <td>
+                代祷事项
+            </td>
+            <td></td>
+            <td>
+                主席
+            </td>
+        </tr>*@
+                @*<tr>
+            <td>圣餐</td>
+            <td>第一组</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>圣餐</td>
+            <td>第二组</td>
+            <td></td>
+        </tr>*@
+            </table>
+        </div>
+    </div>
+    @*<div class="section">
+        <div class="sectionTitleContainer">
+            <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+            <div class="sectionTitle">
+                洗礼程序
+            </div>
+        </div>
+        <div style="clear:both;height:auto;background-color:#DCE6F2;padding:20px;">
+            <p> 1. 洗礼主礼：汪正义牧师 </p>
+            <p> 2. 受洗新人：靳震姐妹 </p>
+            <p> 3. 同唱：快乐日（副歌） </p>
+            <p> 4. 见证分享：靳震姐妹 </p>
+            <p> 5. 长老劝勉 </p>
+            <p> 6. 宣告：使徒信经 </p>
+        </div>
+    </div>*@
+    <div class="section">
+        <div class="sectionTitleContainer">
+            <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+            <div class="sectionTitle">
+                信息筆記
+            </div>
+        </div>
+        <div style="clear:both;height:auto;background-color:#DCE6F2;padding:20px;font-size:64px;">
+            @Model.WorkFlow.SermonTitle | @Model.WorkFlow.BibleReading | <a href="@Model.WorkFlow.SermonSpeakerUrl">@Model.WorkFlow.SermonSpeaker</a>
+        </div>
+        <div style="clear:both;height:auto;background-color:#FFFFFF;padding:20px;width:100%;">
+            @foreach (var line in Model.WorkFlow.SermonDetails)
+            {
+                <div style="margin:10px;">@line</div>
+            }
+        </div>
+    </div>
+    <div class="section">
+        <div class="sectionTitleContainer">
+            <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+            <div class="sectionTitle">
+                讲道记录
+            </div>
+        </div>
+        <div style="clear: both; height: auto; background-color: white; padding: 10px; font-size: 64px;">
+            2022 目录:<a target="_blank" href="https://west561-my.sharepoint.com/:f:/g/personal/enfutang_enfualliance_org/EuwmJ5CHb2BLojdpg84aE2UBxroa_t0Z5c9rUp5e9m4KAQ?e=8jDaju">https://bit.ly/3zCgapK</a>
+        </div>
+        <div style="clear: both; height: auto; background-color: white; padding: 10px; font-size: 64px;">
+            2021 目录:<a target="_blank" href="https://west561-my.sharepoint.com/:f:/g/personal/enfutang_enfualliance_org/Evo__lLqOHhMpq3vv5d5cAcB0gNZeOr2EVRWlosNttQNXg?e=uj0hFm">https://bit.ly/3aGhRX7</a>
+        </div>
+        <div style="clear: both; height: auto; background-color: white; padding: 10px; font-size: 64px;">
+            2020 目录:<a target="_blank" href="https://west561-my.sharepoint.com/:f:/g/personal/enfutang_enfualliance_org/Erip3lWPFaZKj_Tp1ZkiVOEBUnw-cer5BKSXiO41wb62QQ?e=kdKtBG">https://bit.ly/3dddLZn</a>
+        </div>
+        @foreach (var item in Model.SerminViewModels)
+        {
+            <div style="clear: both; height: auto; background-color: #DCE6F2; padding: 10px; font-size: 64px;">
+                @item.SundayDate.ToString("yyyy-MM-dd"): <a target="_blank" href="@item.AudioUrl">
+                    @item.SermonTitle |
+                    @item.BibleReading |
+                    @item.SermonSpeaker
+                </a>
+            </div>
+            <div style="clear:both;height:auto;background-color:#FFFFFF;padding:10px;">
+                @foreach (var line in item.SermonDetails)
+                {
+                    <div style="clear:both;padding:5px;">@line</div>
+                }
+            </div>
+        }
+    </div>
+    <div class="section">
+        <div class="sectionTitleContainer">
+            <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+            <div class="sectionTitle">家事报告</div>
+        </div>
+        <div style="clear: both; font-size: 64px;">
+            <ul style="font-size: 64px;">
+                @foreach (var item in Model.Events)
+                {
+                    if (!string.IsNullOrWhiteSpace(item.EventName) && !string.IsNullOrWhiteSpace(item.EventDesc))
+                    {
+                        <li style="padding: 10px; font-size: 64px;">
+                            <div style="font-weight: bolder; font-size: 64px;">
+                                [@item.EventName]
+                            </div>
+                            <div style="font-size: 64px;">
+                                @item.EventDesc
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="section">
+        <div class="sectionTitleContainer">
+            <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+            <div class="sectionTitle">代禱事項</div>
+        </div>
+        <div style="clear:both;">
+            <ul style="list-style: decimal; margin-left: 80px; padding: 0; font-size: 64px;">
+                @foreach (var item in Model.PrayEvents)
+                {
+                    if (!string.IsNullOrWhiteSpace(item.PrayMatterDesc))
+                    {
+                        <li style="margin: 0; padding: 10px; font-size: 64px;">
+                             @item.PrayMatterDesc
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="sectionTitleContainer">
+            <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+            <div class="sectionTitle">主日事奉團隊</div>
+        </div>
+        <div style="clear:both;">
+            <table class="sundayServe">
+                <tr>
+                    <td style="width:19%;border-bottom:2px solid grey;"></td>
+                    <td style="width:27%;border-bottom:2px solid grey;">@Model.CurrentSundayDate</td>
+                    <td style="width:27%;border-bottom:2px solid grey;">@Model.NextSundayDate</td>
+                    <td style="width:27%;border-bottom:2px solid grey;">@Model.Next2SundayDate</td>
+                </tr>
+                <tr>
+                    <td>讲员</td>
+                    <td>@Model.CurrentSundayServe.SundayServeSpeaker.SundayServeName</td>
+                    <td>@Model.NextSundayServe.SundayServeSpeaker.SundayServeName</td>
+                    <td>@Model.Next2WeeksSundayServe.SundayServeSpeaker.SundayServeName</td>
+                </tr>
+                <tr>
+                    <td>主席</td>
+                    <td>@Model.CurrentSundayServe.SundayServeChairmen.SundayServeName</td>
+                    <td>@Model.NextSundayServe.SundayServeChairmen.SundayServeName</td>
+                    <td>@Model.Next2WeeksSundayServe.SundayServeChairmen.SundayServeName</td>
+                </tr>
+                <tr>
+                    <td>祷告</td>
+                    <td>@Model.CurrentSundayServe.SundayServePrayName.SundayServeName</td>
+                    <td>@Model.NextSundayServe.SundayServePrayName.SundayServeName</td>
+                    <td>@Model.Next2WeeksSundayServe.SundayServePrayName.SundayServeName</td>
+                </tr>
+                <tr>
+                    <td>领诗</td>
+                    <td>@Model.CurrentSundayServe.SundayServeWorshipLeadName.SundayServeName</td>
+                    <td>@Model.NextSundayServe.SundayServeWorshipLeadName.SundayServeName</td>
+                    <td>@Model.Next2WeeksSundayServe.SundayServeWorshipLeadName.SundayServeName</td>
+                </tr>
+                <tr>
+                    <td>敬拜</td>
+                    <td>@Model.CurrentSundayServe.SundayServeWorshipName.SundayServeName</td>
+                    <td>@Model.NextSundayServe.SundayServeWorshipName.SundayServeName</td>
+                    <td>@Model.Next2WeeksSundayServe.SundayServeWorshipName.SundayServeName</td>
+                </tr>
+                <tr>
+                    <td>司琴​</td>
+                    <td>@Model.CurrentSundayServe.SundayServePanio.SundayServeName</td>
+                    <td>@Model.NextSundayServe.SundayServePanio.SundayServeName</td>
+                    <td>@Model.Next2WeeksSundayServe.SundayServePanio.SundayServeName</td>
+                </tr>
+                <tr>
+                    <td>音响</td>
+                    <td>@Model.CurrentSundayServe.SundayServeSound.SundayServeName</td>
+                    <td>@Model.NextSundayServe.SundayServeSound.SundayServeName</td>
+                    <td>@Model.Next2WeeksSundayServe.SundayServeSound.SundayServeName</td>
+                </tr>
+                <tr>
+                    <td>司事</td>
+                    <td>@Model.CurrentSundayServe.SundayServeSecretary.SundayServeName</td>
+                    <td>@Model.NextSundayServe.SundayServeSecretary.SundayServeName</td>
+                    <td>@Model.Next2WeeksSundayServe.SundayServeSecretary.SundayServeName</td>
+                </tr>
+                <tr>
+                    <td>后勤</td>
+                    @*<td>Zoom</td>*@
+                    <td>@Model.CurrentSundayServe.SundayServeLogistics.SundayServeName</td>
+                    <td>@Model.NextSundayServe.SundayServeLogistics.SundayServeName</td>
+                    <td>@Model.Next2WeeksSundayServe.SundayServeLogistics.SundayServeName</td>
+                </tr>
+                <tr>
+                    <td>财务</td>
+                    <td>@Model.CurrentSundayServe.SundayServeAccounting.SundayServeName</td>
+                    <td>@Model.NextSundayServe.SundayServeAccounting.SundayServeName</td>
+                    <td>@Model.Next2WeeksSundayServe.SundayServeAccounting.SundayServeName</td>
+                </tr>
+                <tr>
+                    <td>儿主</td>
+                    <td>@Model.CurrentSundayServe.SundayServeChildTeacher.SundayServeName</td>
+                    <td>@Model.NextSundayServe.SundayServeChildTeacher.SundayServeName</td>
+                    <td>@Model.Next2WeeksSundayServe.SundayServeChildTeacher.SundayServeName</td>
+                </tr>
+                <tr>
+                    <td>青少</td>
+                    <td>@Model.CurrentSundayServe.SundayServeTeenTeacher.SundayServeName</td>
+                    <td>@Model.NextSundayServe.SundayServeTeenTeacher.SundayServeName</td>
+                    <td>@Model.Next2WeeksSundayServe.SundayServeTeenTeacher.SundayServeName</td>
+                </tr>
+                <tr>
+                    <td style="border-bottom:2px solid grey;">新人</td>
+                    <td style="border-bottom:2px solid grey;">@Model.CurrentSundayServe.SundayServeNewPerson.SundayServeName</td>
+                    <td style="border-bottom:2px solid grey;">@Model.NextSundayServe.SundayServeNewPerson.SundayServeName</td>
+                    <td style="border-bottom:2px solid grey;">@Model.Next2WeeksSundayServe.SundayServeNewPerson.SundayServeName</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="section">
+        <div class="sectionTitleContainer">
+            <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+            <div class="sectionTitle">
+                聚會时间表
+            </div>
+        </div>
+        <div style="clear:both;height:2000px;">
+            <table class="tableChangeColor">
+                <tr>
+                    <th style="width: 20%; border-bottom: 1px solid black; font-size: 64px;">聚会</th>
+                    <th style="width: 24%; border-bottom: 1px solid black; font-size: 64px;">时间</th>
+                    <th style="width: 30%; border-bottom: 1px solid black; font-size: 64px;">负责同工</th>
+                    <th style="width: 26%; border-bottom: 1px solid black; font-size: 64px;">电话</th>
+                </tr>
+                @foreach (var item in Model.Teams)
+                {
+                    <tr>
+                        <td style="padding-top: 10px; padding-bottom: 10px; font-size: 64px;">@item.TeamName</td>
+                        <td style="padding-top: 10px; padding-bottom: 10px; font-size: 64px;">@item.TeamDate</td>
+                        <td style="padding-top: 10px; padding-bottom: 10px; font-size: 64px;">@item.TeamLeaderName</td>
+                        <td style="padding-top: 10px; padding-bottom: 10px; font-size: 64px;"><a href="tel:1-@item.TeamPhone">@item.TeamPhone</a></td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="sectionTitleContainer">
+            <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+            <div class="sectionTitle">
+                聚會人數 <span style="font-size:40px;">（@Model.Last2WeeksSundayDate - @Model.Last2WeeksSaturdayDate）</span>
+                @*<span style="font-size:40px;">（01月02－01月08）</span>*@
+            </div>
+        </div>
+        <div style="clear:both;">
+            <table class="tableChangeColor" style="font-size:38px;">
+                <tr>
+                    <td colspan="4">
+                        主日崇拜（@Model.LastSundayDate）
+                        @*成人 + 青少年 总共 @Model.AdultGroupMeeting.GroupMeetingNumber 人*@
+                                                成人 @Model.AdultGroupMeeting.GroupMeetingNumber
+                            青少年 @Model.TeenGroupMeeting.GroupMeetingNumber
+                        @*@Model.TeenGroupMeeting.GroupMeetingNumber*@
+                        儿主 @Model.ChildrenGroupMeeting.GroupMeetingNumber
+                        @*总共 @Model.LastSundayPeopleNumber 人*@
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:33%;">
+                        @Model.PrayGroupMeeting.GroupMeetingType
+                        <span>
+                            @if (Model.PrayGroupMeeting.GroupMeetingNumber > 0)
+                            {
+                                <span>@Model.PrayGroupMeeting.GroupMeetingNumber</span>
+                            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                        </span>
+                    </td>
+                    <td style="width:33%;">
+                        @Model.SundayPrayGroupMeeting.GroupMeetingType
+                        <span>
+                            @if (Model.SundayPrayGroupMeeting.GroupMeetingNumber > 0)
+                            {
+                                <span>@Model.SundayPrayGroupMeeting.GroupMeetingNumber</span>
+                            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                        </span>
+                    </td>
+                    @*<td style="width:33%;">
+                            @Model.BibleReadingGroupMeeting.GroupMeetingType
+                            <span>
+                                @if (Model.BibleReadingGroupMeeting.GroupMeetingNumber > 0)
+                                {
+                                    <span>@Model.BibleReadingGroupMeeting.GroupMeetingNumber</span>
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </span>
+                        </td>*@
+                </tr>
+                @{
+                    for (int i = 0; i < Model.TeamGroupMeetings.Count; i++)
+                    {
+                        <tr>
+                            <td style="width:33%;">
+                                @if (i < Model.TeamGroupMeetings.Count)
+                                {
+                                    <span>@Model.TeamGroupMeetings[i].GroupMeetingType</span>
+                                    if (Model.TeamGroupMeetings[i].GroupMeetingNumber > 0)
+                                    {
+                                        <span>@Model.TeamGroupMeetings[i].GroupMeetingNumber </span>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                    i++;
+                                }
+                            </td>
+                            <td style="width:33%;">
+                                @if (i < Model.TeamGroupMeetings.Count)
+                                {
+                                    <span>@Model.TeamGroupMeetings[i].GroupMeetingType</span>
+                                    if (Model.TeamGroupMeetings[i].GroupMeetingNumber > 0)
+                                    {
+                                        <span>@Model.TeamGroupMeetings[i].GroupMeetingNumber </span>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                    i++;
+                                }
+                            </td>
+                            <td style="width:33%;">
+                                @if (i < Model.TeamGroupMeetings.Count)
+                                {
+                                    <span>@Model.TeamGroupMeetings[i].GroupMeetingType</span>
+                                    if (Model.TeamGroupMeetings[i].GroupMeetingNumber > 0)
+                                    {
+                                        <span>@Model.TeamGroupMeetings[i].GroupMeetingNumber </span>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                    i++;
+                                }
+                            </td>
+                        </tr>
+                        i--;
+                    }
+                }
+
+            </table>
+        </div>
+        <div style="clear:both;height:2px;">
+
+        </div>
+        <div class="sectionTitleContainer">
+            <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+            <div class="sectionTitle">
+                主日奉獻
+            </div>
+        </div>
+        <div style="clear:both;">
+            <table class="tableChangeColor" style="font-size:44px;">
+                <tr>
+                    <td style="width:30%;"></td>
+                    <td style="width:10%;">常费</td>
+                    <td style="width:10%;">建堂</td>
+                    <td style="width:10%;">差传</td>
+                    <td style="width:10%;">欢欢</td>
+                    <td style="width:10%;">感恩</td>
+                    <td style="width:10%;">其他</td>
+                </tr>
+                <tr>
+                    <td>@Model.LastSundayDate</td>
+                    <td>
+                        @if (Model.SundayDonate.RegularDonate > 0)
+                        {<span>$@Model.SundayDonate.RegularDonate.ToString("F0")</span>}
+                    </td>
+                    <td>
+                        @if (Model.SundayDonate.BuildChurchDonate > 0)
+                        {<span>$@Model.SundayDonate.BuildChurchDonate.ToString("F0")</span>}
+                    </td>
+                    <td>
+                        @if (Model.SundayDonate.SpreadDonate > 0)
+                        {<span>$@Model.SundayDonate.SpreadDonate.ToString("F0")</span>}
+                    </td>
+                    <td>
+                        @if (Model.SundayDonate.HuanHuanDonate > 0)
+                        {<span>$@Model.SundayDonate.HuanHuanDonate.ToString("F0")</span>}
+                    </td>
+                    <td>
+                        @if (Model.SundayDonate.ThankGivingDonate > 0)
+                        {<span>$@Model.SundayDonate.ThankGivingDonate.ToString("F0")</span>}
+                    </td>
+                    <td>
+                        @if (Model.SundayDonate.OtherDonate > 0)
+                        {<span>$@Model.SundayDonate.OtherDonate.ToString("F0")</span>}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Model.LastSundayDate.Split(new[] { "月" }, StringSplitOptions.None)[0] 月累積
+                    </td>
+                    <td>
+                        @if (Model.MonthlyDonate.MonthlyRegularDonate > 0)
+                        {<span>$@Model.MonthlyDonate.MonthlyRegularDonate.ToString("F0")</span>}
+                    </td>
+                    <td>
+                        @if (Model.MonthlyDonate.MonthlyBuildChurchDonate > 0)
+                        {<span>$@Model.MonthlyDonate.MonthlyBuildChurchDonate.ToString("F0")</span>}
+                    </td>
+                    <td>
+                        @if (Model.MonthlyDonate.MonthlySpreadDonate > 0)
+                        {<span>$@Model.MonthlyDonate.MonthlySpreadDonate.ToString("F0")</span>}
+                    </td>
+                    <td>
+                        @if (Model.MonthlyDonate.MonthlyHuanHuanDonate > 0)
+                        {<span>$@Model.MonthlyDonate.MonthlyHuanHuanDonate.ToString("F0")</span>}
+                    </td>
+                    <td>
+                        @if (Model.MonthlyDonate.MonthlyThankGivingDonate > 0)
+                        {<span>$@Model.MonthlyDonate.MonthlyThankGivingDonate.ToString("F0")</span>}
+                    </td>
+                    <td>
+                        @if (Model.MonthlyDonate.MonthlyOtherDonate > 0)
+                        {<span>$@Model.MonthlyDonate.MonthlyOtherDonate.ToString("F0")</span>}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="clear:both;">
+            <table class="tableChangeColor" style="font-size:40px;display:inline-block;float:right;width:60%;border:1px solid black;">
+                <tr>
+                    <td style="text-align:center;">@Model.LastSundayDate.Split(new[] { "月" }, StringSplitOptions.None)[0] 月总奉献</td>
+                    <td style="text-align:center;">
+                        @if (Model.MonthDonate > 0) {<span>$@Model.MonthDonate.ToString("#.##")</span>}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">每月總預算</td>
+                    <td style="text-align:center;">$@Model.MonthBudget.ToString("#.##")</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">百分比</td>
+                    <td style="text-align:center;">@Model.MonthDonatePercentage.ToString("P0")</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="section">
+        <div class="sectionTitleContainer">
+            <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+            <div class="sectionTitle">
+                靈修小品
+            </div>
+        </div>
+        <div>
+            <div style="clear:both;background: #DCE6F2;height:70px;font-size:70px;">
+                @Model.SpiritualEssayPray.SpiritualEssayTitle
+            </div>
+            <div style="font-size:64px;">
+                <div style="font-weight:bold;margin-top:15px;margin-bottom:8px;">
+                    @Model.SpiritualEssayPray.SpiritualEssayChaptor
+                </div>
+                <div>
+                    @foreach (var item in Model.SpiritualEssayContents)
+                    {
+                        <div style="margin-top:8px;margin-bottom:8px;">@item</div>
+                    }
+                </div>
+                <div>
+                    <div style="margin:0 auto;font-style:italic;width:90%;text-align:center;margin-top:20px;font-weight:bold;">
+                        @foreach (var item in Model.SpiritualEssayPrays)
+                        {
+                            <div style="margin-top:10px;margin-bottom:10px;">@item</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div>
+            <div class="sectionTitleContainer">
+                <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                <div class="sectionTitle">
+                    宣道會會徽－四重福音
+                </div>
+            </div>
+            <div style="clear:both;">
+                <div>
+                    宣道會初創時，即已開始用十字架、洗濯盆、油瓶，和冠冕，來象徵基督福音的完備性。
+                </div>
+            </div>
+            <div style="clear:both;font-size:36px;margin-top:30px;">
+                <div>
+                    <div style="display:inline-block;float:left;width:220px;padding-left:20px;padding-top:50px;"><img src="data:image/png;base64,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" style="width:180px;" /></div>
+                    <div style="display:inline-block;float:left;width:700px;padding:20px;border:3px solid black;border-top-left-radius:50px;border-bottom-right-radius:50px;">
+                        <ul>
+                            <li>
+                                十字架－象徵基督的死與復活作成每個信徒的救恩
+                            </li>
+                            <li>
+                                洗濯盆－象徵基督使我們成聖的恩典，使我們每日靠內住聖靈的能力從罪中得潔淨
+                            </li>
+                            <li>
+                                油　瓶－象徵聖靈的生命與肉身的醫治　　　　藉著信徒對神話語的順服而領受
+                            </li>
+                            <li>
+                                冠　冕－象徵萬王之王、萬主之主的基督之再來，
+                                和那些分享基督榮耀的信徒所獲得的獎賞
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div style="clear:both;margin-top:30px;">
+            <div class="sectionTitleContainer">
+                <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                <div class="sectionTitle">
+                    教會立場
+                </div>
+            </div>
+            <div>
+                <table class="tableChangeColor" styel="clear:both;font-size:font-size:44px;">
+                    <tr>
+                        <td style="width:12%;">
+                            政治
+                        </td>
+                        <td style="width:88%;">
+                            我们要常常为国家及政治领袖祷告，也尊重每个人的政治立场；但请不要在教会及小组中从事政治活动或发表立场或言论，避免引起不必要的冲突和对立。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            奉献
+                        </td>
+                        <td>
+                            这是每位基督徒蒙福的途径及应尽的责任（玛拉基书3:10）但若您还不是基督徒可以先不奉献，我们竭诚欢迎您早日成为主的儿女，在奉献中蒙福。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            推销
+                        </td>
+                        <td>
+                            我们尊重基金、保险、理财、直销等职业从业人员。他们可以在初入教会及小组时简单介绍自己的职业，但不宜在教会或小组中主动或强力向会友推销，若弟兄姊妹有需要可自愿性的向他们询问或购买。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:12%;">
+                            借贷
+                        </td>
+                        <td style="width:88%;">
+                            我们鼓励弟兄姊妹在他人有缺乏时甘心乐意的资助，但会友间若有借贷或其他金钱往来时，请告知小组长和牧者以做遮盖。
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    @*<div class="section">
+        <div style="clear:both;margin-top:30px;margin-bottom:30px;">
+            <div class="sectionTitleContainer">
+                <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                <div class="sectionTitle">
+                    靈修经文
+                </div>
+            </div>
+        </div>
+        <div>
+            <table style="width:98%;margin: 0 auto;font-size: 50px;">
+                @for (int i = 0; i < 14; i++)
+                {
+                    if (i < Model.BibleReadings.Count)
+                    {
+                        <tr id="bible-reading-@i">
+                            <td style="text-align:left;border:1px solid black;">
+                                <div>
+                                    <div style="font-weight:bold;padding-top:15px;padding-bottom:15px;">
+                                        @Model.BibleReadings[i].ViewModels[0].BibleReadingDate.ToString("MM/dd")
+                                        @Model.BibleReadings[i].ViewModels[0].BibleReadingChaptor
+                                    </div>
+                                    @for (int j = 0; j < @Model.BibleReadings[i].ViewModels.Count; j++)
+                                    {
+                                        <div>@Model.BibleReadings[i].ViewModels[j].BibleReadingContent</div>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>*@
+    <div class="section">
+        <div id="readme" style="clear:both;margin-top:15px;margin-bottom:10px;">
+            <div class="sectionTitleContainer">
+                <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+                <div class="sectionTitle">
+                    周报说明
+                </div>
+            </div>
+        </div>
+        <div style="clear:both;">
+            <div>
+                <p>点击蓝色字体后会打开对应的应用或网站. 例如: 点击敬拜歌曲会打开Youtube，点击电话会拨打对应号码 等等, 功能暂时只工作在Android.</p>
+                <ul style="margin-left:80px;list-style:decimal;padding:0;">
+                    <li>点击恩福堂Logo, 会打开恩福堂网页.</li>
+                    <li>点击注解会打开经文网页和注解。点击音频图标会播放经文和注解</li>
+                    <li>网络敬拜, 点击蓝色字体, 自动指向Zoom或Youtube应用.</li>
+                    <li>点击周报功能说明会指向这个说明.</li>
+                    <li>点击敬拜歌曲名字会打开歌曲Youtube链接.</li>
+                    <li>点击讲员名字，会链接到关于讲员的简介网页或者讲员所属教会网站.</li>
+                    <li>讲道记录，点击蓝色字体会自动播放对应讲道.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

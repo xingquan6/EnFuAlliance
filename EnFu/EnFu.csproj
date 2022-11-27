@@ -1,0 +1,882 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{73019B48-27E7-4AA1-905A-749E90770609}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EnFu</RootNamespace>
+    <AssemblyName>EnFu</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis, Version=1.41.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.41.1\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.41.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.41.1\lib\net45\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.41.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.41.1\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.41.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.41.1\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Drive.v3, Version=1.41.1.1705, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Drive.v3.1.41.1.1705\lib\net45\Google.Apis.Drive.v3.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.41.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.41.1\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NReco.PdfGenerator, Version=1.1.15.0, Culture=neutral, PublicKeyToken=231663d50a41b451, processorArchitecture=MSIL">
+      <HintPath>..\packages\NReco.PdfGenerator.1.1.15\lib\net20\NReco.PdfGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.1.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.1.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.1.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.1.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DAL\Core\GenericRepository.cs" />
+    <Compile Include="DAL\IdentityModels.cs" />
+    <Compile Include="DAL\ModelsTemp\Book.cs" />
+    <Compile Include="DAL\ModelsTemp\ChildrenBook.cs" />
+    <Compile Include="DAL\ModelsTemp\ChildrenClass.cs" />
+    <Compile Include="DAL\ModelsTemp\ChildrenLesson.cs" />
+    <Compile Include="DAL\ModelsTemp\Department.cs" />
+    <Compile Include="DAL\ModelsTemp\FileUpload.cs" />
+    <Compile Include="DAL\ModelsTemp\MemberDuty.cs" />
+    <Compile Include="DAL\ModelsTemp\Notice.cs" />
+    <Compile Include="DAL\ModelsTemp\NoticePerson.cs" />
+    <Compile Include="DAL\ModelsTemp\Story.cs" />
+    <Compile Include="DAL\ModelsTemp\Teacher.cs" />
+    <Compile Include="DAL\ModelsTemp\UserInTeam.cs" />
+    <Compile Include="DAL\ModelsTemp\Visiter.cs" />
+    <Compile Include="DAL\Models\BibleChaptor.cs" />
+    <Compile Include="DAL\Models\BibleChaptorLink.cs" />
+    <Compile Include="DAL\Models\BibleChaptorDetail.cs" />
+    <Compile Include="DAL\Models\BibleReading.cs" />
+    <Compile Include="DAL\Models\CallChaptor.cs" />
+    <Compile Include="DAL\Models\Donate.cs" />
+    <Compile Include="DAL\Models\DonateBibleChaptor.cs" />
+    <Compile Include="DAL\Models\Event.cs" />
+    <Compile Include="DAL\Models\GroupMeeting.cs" />
+    <Compile Include="DAL\Models\Multimedia.cs" />
+    <Compile Include="DAL\Models\MultimediaType.cs" />
+    <Compile Include="DAL\Models\Post.cs" />
+    <Compile Include="DAL\Models\PrayMatter.cs" />
+    <Compile Include="DAL\Models\SpiritualEssay.cs" />
+    <Compile Include="DAL\Models\SundayReport.cs" />
+    <Compile Include="DAL\Models\SundayServe.cs" />
+    <Compile Include="DAL\Models\Team.cs" />
+    <Compile Include="DAL\Models\UserProfile.cs" />
+    <Compile Include="DAL\Models\WorkFlow.cs" />
+    <Compile Include="DAL\Models\WorshipSong.cs" />
+    <Compile Include="DAL\Models\WorshipSongLyrics.cs" />
+    <Compile Include="DAL\Models\WorshipSongServe.cs" />
+    <Compile Include="DAL\UnitOfWork.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\DateTimeHelper.cs" />
+    <Compile Include="Helpers\TextHelper.cs" />
+    <Compile Include="Migrations\201909141730071_initial.cs" />
+    <Compile Include="Migrations\201909141730071_initial.Designer.cs">
+      <DependentUpon>201909141730071_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910030250554_AddTableBibleReading.cs" />
+    <Compile Include="Migrations\201910030250554_AddTableBibleReading.Designer.cs">
+      <DependentUpon>201910030250554_AddTableBibleReading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910030337050_AddTableWorshipSong.cs" />
+    <Compile Include="Migrations\201910030337050_AddTableWorshipSong.Designer.cs">
+      <DependentUpon>201910030337050_AddTableWorshipSong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910030344122_AddTableWorshipSongServe.cs" />
+    <Compile Include="Migrations\201910030344122_AddTableWorshipSongServe.Designer.cs">
+      <DependentUpon>201910030344122_AddTableWorshipSongServe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911060219359_AddWorkFlow.cs" />
+    <Compile Include="Migrations\201911060219359_AddWorkFlow.Designer.cs">
+      <DependentUpon>201911060219359_AddWorkFlow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911060351530_ChangeWorkFlow.cs" />
+    <Compile Include="Migrations\201911060351530_ChangeWorkFlow.Designer.cs">
+      <DependentUpon>201911060351530_ChangeWorkFlow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911070021083_AddInformationNote.cs" />
+    <Compile Include="Migrations\201911070021083_AddInformationNote.Designer.cs">
+      <DependentUpon>201911070021083_AddInformationNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911070110397_AddGroupMeeting.cs" />
+    <Compile Include="Migrations\201911070110397_AddGroupMeeting.Designer.cs">
+      <DependentUpon>201911070110397_AddGroupMeeting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911070133128_AddGroupMeetingGroupTypeField.cs" />
+    <Compile Include="Migrations\201911070133128_AddGroupMeetingGroupTypeField.Designer.cs">
+      <DependentUpon>201911070133128_AddGroupMeetingGroupTypeField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911070255244_AddDonate.cs" />
+    <Compile Include="Migrations\201911070255244_AddDonate.Designer.cs">
+      <DependentUpon>201911070255244_AddDonate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911070503008_ChangeSundayServe.cs" />
+    <Compile Include="Migrations\201911070503008_ChangeSundayServe.Designer.cs">
+      <DependentUpon>201911070503008_ChangeSundayServe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911080435408_AddSpritualEssay.cs" />
+    <Compile Include="Migrations\201911080435408_AddSpritualEssay.Designer.cs">
+      <DependentUpon>201911080435408_AddSpritualEssay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911142332384_AddBibleChaptor.cs" />
+    <Compile Include="Migrations\201911142332384_AddBibleChaptor.Designer.cs">
+      <DependentUpon>201911142332384_AddBibleChaptor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911142340299_ChangeBibleChaptor0.cs" />
+    <Compile Include="Migrations\201911142340299_ChangeBibleChaptor0.Designer.cs">
+      <DependentUpon>201911142340299_ChangeBibleChaptor0.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911150006257_AddBibleChaptorDetail.cs" />
+    <Compile Include="Migrations\201911150006257_AddBibleChaptorDetail.Designer.cs">
+      <DependentUpon>201911150006257_AddBibleChaptorDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911162006290_AddLyrics.cs" />
+    <Compile Include="Migrations\201911162006290_AddLyrics.Designer.cs">
+      <DependentUpon>201911162006290_AddLyrics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911200411032_updateTable.cs" />
+    <Compile Include="Migrations\201911200411032_updateTable.Designer.cs">
+      <DependentUpon>201911200411032_updateTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911232256563_AddWorshipSongIdInServeTable.cs" />
+    <Compile Include="Migrations\201911232256563_AddWorshipSongIdInServeTable.Designer.cs">
+      <DependentUpon>201911232256563_AddWorshipSongIdInServeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911241548579_AddWorshipSongFields.cs" />
+    <Compile Include="Migrations\201911241548579_AddWorshipSongFields.Designer.cs">
+      <DependentUpon>201911241548579_AddWorshipSongFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911241607412_ChangeWorshipSong.cs" />
+    <Compile Include="Migrations\201911241607412_ChangeWorshipSong.Designer.cs">
+      <DependentUpon>201911241607412_ChangeWorshipSong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911260230411_RemoveTables.cs" />
+    <Compile Include="Migrations\201911260230411_RemoveTables.Designer.cs">
+      <DependentUpon>201911260230411_RemoveTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911260333544_AddTables.cs" />
+    <Compile Include="Migrations\201911260333544_AddTables.Designer.cs">
+      <DependentUpon>201911260333544_AddTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911260354051_AddSortOrderFields.cs" />
+    <Compile Include="Migrations\201911260354051_AddSortOrderFields.Designer.cs">
+      <DependentUpon>201911260354051_AddSortOrderFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911260401534_ChangeWorkFlow1.cs" />
+    <Compile Include="Migrations\201911260401534_ChangeWorkFlow1.Designer.cs">
+      <DependentUpon>201911260401534_ChangeWorkFlow1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911280502034_ChangeSundayServe1.cs" />
+    <Compile Include="Migrations\201911280502034_ChangeSundayServe1.Designer.cs">
+      <DependentUpon>201911280502034_ChangeSundayServe1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912110218008_changeBibleChaptor.cs" />
+    <Compile Include="Migrations\201912110218008_changeBibleChaptor.Designer.cs">
+      <DependentUpon>201912110218008_changeBibleChaptor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912110244033_ChangeBibleDetail.cs" />
+    <Compile Include="Migrations\201912110244033_ChangeBibleDetail.Designer.cs">
+      <DependentUpon>201912110244033_ChangeBibleDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912120241032_AddUserProfileMoreFields.cs" />
+    <Compile Include="Migrations\201912120241032_AddUserProfileMoreFields.Designer.cs">
+      <DependentUpon>201912120241032_AddUserProfileMoreFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002011729167_removeEventUselessFields.cs" />
+    <Compile Include="Migrations\202002011729167_removeEventUselessFields.Designer.cs">
+      <DependentUpon>202002011729167_removeEventUselessFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002011741302_removeAllUselessFields.cs" />
+    <Compile Include="Migrations\202002011741302_removeAllUselessFields.Designer.cs">
+      <DependentUpon>202002011741302_removeAllUselessFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002021501276_addOrderInEvent.cs" />
+    <Compile Include="Migrations\202002021501276_addOrderInEvent.Designer.cs">
+      <DependentUpon>202002021501276_addOrderInEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002022331341_changeInformationNoteToWorkFlow.cs" />
+    <Compile Include="Migrations\202002022331341_changeInformationNoteToWorkFlow.Designer.cs">
+      <DependentUpon>202002022331341_changeInformationNoteToWorkFlow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002030202354_RemoveInformationNoteTable.cs" />
+    <Compile Include="Migrations\202002030202354_RemoveInformationNoteTable.Designer.cs">
+      <DependentUpon>202002030202354_RemoveInformationNoteTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002030209095_RemoveSomeUselessFields.cs" />
+    <Compile Include="Migrations\202002030209095_RemoveSomeUselessFields.Designer.cs">
+      <DependentUpon>202002030209095_RemoveSomeUselessFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002040445562_removeUselessFieldFromGroupMeeting.cs" />
+    <Compile Include="Migrations\202002040445562_removeUselessFieldFromGroupMeeting.Designer.cs">
+      <DependentUpon>202002040445562_removeUselessFieldFromGroupMeeting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002260305071_AddUrlForWorshipSOngServe.cs" />
+    <Compile Include="Migrations\202002260305071_AddUrlForWorshipSOngServe.Designer.cs">
+      <DependentUpon>202002260305071_AddUrlForWorshipSOngServe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003030335351_changeWorshipSongFields.cs" />
+    <Compile Include="Migrations\202003030335351_changeWorshipSongFields.Designer.cs">
+      <DependentUpon>202003030335351_changeWorshipSongFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003030339523_changeWorshipSongFieldsExta.cs" />
+    <Compile Include="Migrations\202003030339523_changeWorshipSongFieldsExta.Designer.cs">
+      <DependentUpon>202003030339523_changeWorshipSongFieldsExta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003030342260_addNameOfWorshipSong.cs" />
+    <Compile Include="Migrations\202003030342260_addNameOfWorshipSong.Designer.cs">
+      <DependentUpon>202003030342260_addNameOfWorshipSong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006100528427_AddFieldsToWorkFlowAndBibleReading.cs" />
+    <Compile Include="Migrations\202006100528427_AddFieldsToWorkFlowAndBibleReading.Designer.cs">
+      <DependentUpon>202006100528427_AddFieldsToWorkFlowAndBibleReading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006110241489_AddSpeakerUrlToWorkFlow.cs" />
+    <Compile Include="Migrations\202006110241489_AddSpeakerUrlToWorkFlow.Designer.cs">
+      <DependentUpon>202006110241489_AddSpeakerUrlToWorkFlow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006230433047_AddBibleChaptorDetailToBibleReading.cs" />
+    <Compile Include="Migrations\202006230433047_AddBibleChaptorDetailToBibleReading.Designer.cs">
+      <DependentUpon>202006230433047_AddBibleChaptorDetailToBibleReading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006300215459_AddBibleSnToBibleReading.cs" />
+    <Compile Include="Migrations\202006300215459_AddBibleSnToBibleReading.Designer.cs">
+      <DependentUpon>202006300215459_AddBibleSnToBibleReading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007191645589_RemoveContentFromBibleReading.cs" />
+    <Compile Include="Migrations\202007191645589_RemoveContentFromBibleReading.Designer.cs">
+      <DependentUpon>202007191645589_RemoveContentFromBibleReading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007191652472_CreateIndexForBibleChaptorDetail.cs" />
+    <Compile Include="Migrations\202007191652472_CreateIndexForBibleChaptorDetail.Designer.cs">
+      <DependentUpon>202007191652472_CreateIndexForBibleChaptorDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104180352324_AddTwoFieldsBibleReading.cs" />
+    <Compile Include="Migrations\202104180352324_AddTwoFieldsBibleReading.Designer.cs">
+      <DependentUpon>202104180352324_AddTwoFieldsBibleReading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109251431144_addPostAndPostContent.cs" />
+    <Compile Include="Migrations\202109251431144_addPostAndPostContent.Designer.cs">
+      <DependentUpon>202109251431144_addPostAndPostContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109251542092_addMultimediaAndMultimediaType.cs" />
+    <Compile Include="Migrations\202109251542092_addMultimediaAndMultimediaType.Designer.cs">
+      <DependentUpon>202109251542092_addMultimediaAndMultimediaType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109251547177_changeMultimediaTypeToMultimediaTypeId.cs" />
+    <Compile Include="Migrations\202109251547177_changeMultimediaTypeToMultimediaTypeId.Designer.cs">
+      <DependentUpon>202109251547177_changeMultimediaTypeToMultimediaTypeId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111071617115_AddSermonWorshipSongToWorkflow.cs" />
+    <Compile Include="Migrations\202111071617115_AddSermonWorshipSongToWorkflow.Designer.cs">
+      <DependentUpon>202111071617115_AddSermonWorshipSongToWorkflow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201031352062_AddMoreAudioVideoLinkToBibleReading.cs" />
+    <Compile Include="Migrations\202201031352062_AddMoreAudioVideoLinkToBibleReading.designer.cs">
+      <DependentUpon>202201031352062_AddMoreAudioVideoLinkToBibleReading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201051601104_changeBibleReadingColumnNames.cs" />
+    <Compile Include="Migrations\202201051601104_changeBibleReadingColumnNames.designer.cs">
+      <DependentUpon>202201051601104_changeBibleReadingColumnNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201051612424_removeBibleReadingColumnNames.cs" />
+    <Compile Include="Migrations\202201051612424_removeBibleReadingColumnNames.designer.cs">
+      <DependentUpon>202201051612424_removeBibleReadingColumnNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201251523090_addBibleChaptorLinkTable.cs" />
+    <Compile Include="Migrations\202201251523090_addBibleChaptorLinkTable.designer.cs">
+      <DependentUpon>202201251523090_addBibleChaptorLinkTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201251525242_addBibleChaptorLink.cs" />
+    <Compile Include="Migrations\202201251525242_addBibleChaptorLink.designer.cs">
+      <DependentUpon>202201251525242_addBibleChaptorLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201251550038_addBibleChaptorLinkMoreColumns.cs" />
+    <Compile Include="Migrations\202201251550038_addBibleChaptorLinkMoreColumns.designer.cs">
+      <DependentUpon>202201251550038_addBibleChaptorLinkMoreColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202220331131_removeSomeFieldsOnBibleChaptorLink.cs" />
+    <Compile Include="Migrations\202202220331131_removeSomeFieldsOnBibleChaptorLink.designer.cs">
+      <DependentUpon>202202220331131_removeSomeFieldsOnBibleChaptorLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BibleDetail.cs" />
+    <Compile Include="Models\DataViewModel.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\DataBaseViewModel.cs" />
+    <Compile Include="Modules\BibleProcesser.cs" />
+    <Compile Include="Modules\DataProcesser.cs" />
+    <Compile Include="Modules\EntityMapper.cs" />
+    <Compile Include="Modules\Enums\Options.cs" />
+    <Compile Include="Modules\Enums\SundayReportEnums.cs" />
+    <Compile Include="Modules\Services\DataService.cs" />
+    <Compile Include="Modules\Services\GoogleService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\readme.txt" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-conio-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-convert-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-environment-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-filesystem-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-heap-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-locale-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-math-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-multibyte-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-private-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-process-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-runtime-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-stdio-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-string-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-time-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\api-ms-win-crt-utility-l1-1-0.dll" />
+    <Content Include="App_Data\wkhtmltopdf\concrt140.dll" />
+    <Content Include="App_Data\wkhtmltopdf\msvcp140.dll" />
+    <Content Include="App_Data\wkhtmltopdf\ucrtbase.dll" />
+    <Content Include="App_Data\wkhtmltopdf\vcruntime140.dll" />
+    <Content Include="App_Data\wkhtmltopdf\wkhtmltopdf.exe" />
+    <Content Include="Bible\index.html" />
+    <Content Include="Bible\Production\bible\bible.html" />
+    <Content Include="Bible\Production\bible\bible.js" />
+    <Content Include="Bible\Production\bible\bibleChaptors.js" />
+    <Content Include="Bible\Production\index.html" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Images\EnFuBlackLogo.png" />
+    <Content Include="Images\EnFuScanCode.png" />
+    <Content Include="favicon.ico" />
+    <Content Include="faviconOld.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\EnFuLogo.png" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="credentials.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Bible\.vs\Bible\config\applicationhost.config" />
+    <Content Include="Bible\.vs\slnx.sqlite" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Document\Index.cshtml" />
+    <Content Include="Views\Document\PdfExport.cshtml" />
+    <Content Include="Views\Document\PdfExportFooter.cshtml" />
+    <Content Include="Views\Document\PdfExportHeader.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Worship.cshtml" />
+    <Content Include="Views\Document\PdfMobileExport.cshtml" />
+    <Content Include="Views\Document\EventOld.cshtml" />
+    <Content Include="Views\Document\Download.cshtml" />
+    <Content Include="Views\Document\PdfPrintExport.cshtml" />
+    <Content Include="Views\Document\PdfWorshipExport.cshtml" />
+    <Content Include="Views\Document\WorkFlowDetailsOld.cshtml" />
+    <Content Include="Views\Document\Event.cshtml" />
+    <Content Include="Views\Document\PrayMatter.cshtml" />
+    <Content Include="Views\Document\GroupMeetingDetails.cshtml" />
+    <Content Include="Views\Document\DonateDetails.cshtml" />
+    <Content Include="Views\Document\InformationNote.cshtml" />
+    <Content Include="Views\Document\SundayServeDetails.cshtml" />
+    <Content Include="Views\Document\_SundayServeList.cshtml" />
+    <Content Include="Views\Document\EventDetails.cshtml" />
+    <Content Include="Views\Document\DownloadDetail.cshtml" />
+    <Content Include="Views\Document\PrintMobileExport.cshtml" />
+    <Content Include="Views\Document\PrintPrintExport.cshtml" />
+    <Content Include="Views\Document\PrintWorshipExport.cshtml" />
+    <Content Include="Views\Document\DownloadPdf.cshtml" />
+    <Content Include="Views\Document\SundayServe.cshtml" />
+    <Content Include="Views\Document\_Search.cshtml" />
+    <Content Include="Views\Document\WorkFlow.cshtml" />
+    <Content Include="Views\Document\PrayMatterDetails.cshtml" />
+    <Content Include="Views\Document\GroupMeeting.cshtml" />
+    <Content Include="Views\Document\SpiritualEssay.cshtml" />
+    <Content Include="Views\Document\SpiritualEssayDetails.cshtml" />
+    <Content Include="Views\Document\Donate.cshtml" />
+    <Content Include="Views\Document\SaveSuccess.cshtml" />
+    <Content Include="Views\Document\SaveError.cshtml" />
+    <Content Include="Views\Document\WorshipSongServe.cshtml" />
+    <Content Include="Views\Document\WorshipSongServeDetails.cshtml" />
+    <Content Include="Views\Document\WorkFlowDetails.cshtml" />
+    <Content Include="Views\Document\PdfBibleReading.cshtml" />
+    <Content Include="Views\Document\PdfBibleReadingMonth.cshtml" />
+    <Content Include="Views\Document\Bible.cshtml" />
+    <Content Include="Views\Document\PdfMobileExportSpecialEvent.cshtml" />
+    <Content Include="Views\Document\PdfMobileExportSpecialEventSimple.cshtml" />
+    <Content Include="Views\Document\PdfMobileExportTemplate.cshtml" />
+    <Content Include="Views\Document\PdfMobileExportBigFont.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bible\.vs\Bible\v16\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201909141730071_initial.resx">
+      <DependentUpon>201909141730071_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910030250554_AddTableBibleReading.resx">
+      <DependentUpon>201910030250554_AddTableBibleReading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910030337050_AddTableWorshipSong.resx">
+      <DependentUpon>201910030337050_AddTableWorshipSong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910030344122_AddTableWorshipSongServe.resx">
+      <DependentUpon>201910030344122_AddTableWorshipSongServe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911060219359_AddWorkFlow.resx">
+      <DependentUpon>201911060219359_AddWorkFlow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911060351530_ChangeWorkFlow.resx">
+      <DependentUpon>201911060351530_ChangeWorkFlow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911070021083_AddInformationNote.resx">
+      <DependentUpon>201911070021083_AddInformationNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911070110397_AddGroupMeeting.resx">
+      <DependentUpon>201911070110397_AddGroupMeeting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911070133128_AddGroupMeetingGroupTypeField.resx">
+      <DependentUpon>201911070133128_AddGroupMeetingGroupTypeField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911070255244_AddDonate.resx">
+      <DependentUpon>201911070255244_AddDonate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911070503008_ChangeSundayServe.resx">
+      <DependentUpon>201911070503008_ChangeSundayServe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911080435408_AddSpritualEssay.resx">
+      <DependentUpon>201911080435408_AddSpritualEssay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911142332384_AddBibleChaptor.resx">
+      <DependentUpon>201911142332384_AddBibleChaptor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911142340299_ChangeBibleChaptor0.resx">
+      <DependentUpon>201911142340299_ChangeBibleChaptor0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911150006257_AddBibleChaptorDetail.resx">
+      <DependentUpon>201911150006257_AddBibleChaptorDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911162006290_AddLyrics.resx">
+      <DependentUpon>201911162006290_AddLyrics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911200411032_updateTable.resx">
+      <DependentUpon>201911200411032_updateTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911232256563_AddWorshipSongIdInServeTable.resx">
+      <DependentUpon>201911232256563_AddWorshipSongIdInServeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911241548579_AddWorshipSongFields.resx">
+      <DependentUpon>201911241548579_AddWorshipSongFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911241607412_ChangeWorshipSong.resx">
+      <DependentUpon>201911241607412_ChangeWorshipSong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911260230411_RemoveTables.resx">
+      <DependentUpon>201911260230411_RemoveTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911260333544_AddTables.resx">
+      <DependentUpon>201911260333544_AddTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911260354051_AddSortOrderFields.resx">
+      <DependentUpon>201911260354051_AddSortOrderFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911260401534_ChangeWorkFlow1.resx">
+      <DependentUpon>201911260401534_ChangeWorkFlow1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911280502034_ChangeSundayServe1.resx">
+      <DependentUpon>201911280502034_ChangeSundayServe1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912110218008_changeBibleChaptor.resx">
+      <DependentUpon>201912110218008_changeBibleChaptor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912110244033_ChangeBibleDetail.resx">
+      <DependentUpon>201912110244033_ChangeBibleDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912120241032_AddUserProfileMoreFields.resx">
+      <DependentUpon>201912120241032_AddUserProfileMoreFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002011729167_removeEventUselessFields.resx">
+      <DependentUpon>202002011729167_removeEventUselessFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002011741302_removeAllUselessFields.resx">
+      <DependentUpon>202002011741302_removeAllUselessFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002021501276_addOrderInEvent.resx">
+      <DependentUpon>202002021501276_addOrderInEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002022331341_changeInformationNoteToWorkFlow.resx">
+      <DependentUpon>202002022331341_changeInformationNoteToWorkFlow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002030202354_RemoveInformationNoteTable.resx">
+      <DependentUpon>202002030202354_RemoveInformationNoteTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002030209095_RemoveSomeUselessFields.resx">
+      <DependentUpon>202002030209095_RemoveSomeUselessFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002040445562_removeUselessFieldFromGroupMeeting.resx">
+      <DependentUpon>202002040445562_removeUselessFieldFromGroupMeeting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002260305071_AddUrlForWorshipSOngServe.resx">
+      <DependentUpon>202002260305071_AddUrlForWorshipSOngServe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003030335351_changeWorshipSongFields.resx">
+      <DependentUpon>202003030335351_changeWorshipSongFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003030339523_changeWorshipSongFieldsExta.resx">
+      <DependentUpon>202003030339523_changeWorshipSongFieldsExta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003030342260_addNameOfWorshipSong.resx">
+      <DependentUpon>202003030342260_addNameOfWorshipSong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006100528427_AddFieldsToWorkFlowAndBibleReading.resx">
+      <DependentUpon>202006100528427_AddFieldsToWorkFlowAndBibleReading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006110241489_AddSpeakerUrlToWorkFlow.resx">
+      <DependentUpon>202006110241489_AddSpeakerUrlToWorkFlow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006230433047_AddBibleChaptorDetailToBibleReading.resx">
+      <DependentUpon>202006230433047_AddBibleChaptorDetailToBibleReading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006300215459_AddBibleSnToBibleReading.resx">
+      <DependentUpon>202006300215459_AddBibleSnToBibleReading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007191645589_RemoveContentFromBibleReading.resx">
+      <DependentUpon>202007191645589_RemoveContentFromBibleReading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007191652472_CreateIndexForBibleChaptorDetail.resx">
+      <DependentUpon>202007191652472_CreateIndexForBibleChaptorDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104180352324_AddTwoFieldsBibleReading.resx">
+      <DependentUpon>202104180352324_AddTwoFieldsBibleReading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109251431144_addPostAndPostContent.resx">
+      <DependentUpon>202109251431144_addPostAndPostContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109251542092_addMultimediaAndMultimediaType.resx">
+      <DependentUpon>202109251542092_addMultimediaAndMultimediaType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109251547177_changeMultimediaTypeToMultimediaTypeId.resx">
+      <DependentUpon>202109251547177_changeMultimediaTypeToMultimediaTypeId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111071617115_AddSermonWorshipSongToWorkflow.resx">
+      <DependentUpon>202111071617115_AddSermonWorshipSongToWorkflow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201031352062_AddMoreAudioVideoLinkToBibleReading.resx">
+      <DependentUpon>202201031352062_AddMoreAudioVideoLinkToBibleReading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201051601104_changeBibleReadingColumnNames.resx">
+      <DependentUpon>202201051601104_changeBibleReadingColumnNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201051612424_removeBibleReadingColumnNames.resx">
+      <DependentUpon>202201051612424_removeBibleReadingColumnNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201251523090_addBibleChaptorLinkTable.resx">
+      <DependentUpon>202201251523090_addBibleChaptorLinkTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201251525242_addBibleChaptorLink.resx">
+      <DependentUpon>202201251525242_addBibleChaptorLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201251550038_addBibleChaptorLinkMoreColumns.resx">
+      <DependentUpon>202201251550038_addBibleChaptorLinkMoreColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202220331131_removeSomeFieldsOnBibleChaptorLink.resx">
+      <DependentUpon>202202220331131_removeSomeFieldsOnBibleChaptorLink.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63268</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:63288/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:63288/</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="CreateDirectories" AfterTargets="GatherAllFilesToPublish">
+    <MakeDir Directories="$(OutputPath)App_Data\" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

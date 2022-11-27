@@ -1,0 +1,363 @@
+﻿@model EnFu.Models.SundayReportPdfViewModel
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+    body {
+        font-size: 56px;
+    }
+
+    div {
+        font-size: 56px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .divLeftBlock {
+        display: inline-block;
+        float: left;
+    }
+
+    .pageBody {
+        background-color: white;
+        font-family: arial;
+        margin-top: 20px;
+        height: 5000px;
+    }
+
+    .section {
+        padding: 5px;
+        margin-top: 40px;
+        clear: both;
+        /*height: 1190px;*/
+    }
+
+    .sectionTitleContainer {
+        height: 100px;
+    }
+
+    .blueLogo {
+        width: 0;
+        height: 0;
+        border-bottom: 80px solid transparent;
+        border-left: 80px solid #0070C0;
+    }
+
+    .blueLogoContainer {
+        height: 80px;
+        width: 80px;
+        display: inline-block;
+        float: left;
+    }
+
+    .sectionTitle {
+        height: 80px;
+        width: 700px;
+        display: inline-block;
+        float: left;
+        text-align: left;
+        font-size: 60px;
+        font-weight: bold;
+        padding-left: 20px;
+        padding-top: 10px;
+    }
+
+    table {
+        width: 100%;
+        font-size: 56px;
+    }
+
+        table tr td {
+            text-align: left;
+            padding: 5px;
+            font-size: 52px;
+        }
+
+    .tableChangeColor {
+        font-size: 30px;
+    }
+
+        .tableChangeColor tr:nth-child(even) {
+            background: #FFFFFF;
+        }
+
+        .tableChangeColor tr:nth-child(odd) {
+            background: #DCE6F2;
+        }
+
+        .tableChangeColor tr td {
+            text-align: center;
+        }
+
+            .tableChangeColor tr td:nth-child(2) {
+                text-align: left;
+            }
+
+    ul {
+        margin: 0;
+        padding: 5px;
+        list-style: none;
+    }
+
+        ul li {
+            text-align: left;
+            padding: 5px;
+        }
+
+    .tbl-bible-reading {
+        text-align: center;
+        padding-top: 20px;
+        font-size: 56px;
+        display: inline-block;
+        float: left;
+        width: 100%;
+        border-bottom: 2px solid black;
+    }
+
+        .tbl-bible-reading tr td {
+            text-align: center;
+            padding: 10px;
+            border-bottom: 1px solid lightgray;
+        }
+
+    .sundayServe td {
+        text-align: center;
+    }
+</style>
+<div class="pageBody">
+    <div class="section">
+        <div class="sectionTitleContainer">
+            <div class="blueLogoContainer"><div class="blueLogo"></div></div>
+            <div class="sectionTitle">主日崇拜程序</div>
+        </div>
+        <div style="clear:both;">
+            <table class="tableChangeColor" style="font-size:56px;">
+                <tr>
+                    <td style="width:20%;">宣召</td>
+                    <td style="width:50%;">
+                        <div>@Model.WorkFlow.CallDetail</div>
+                        <div style="text-align:right;">- @Model.WorkFlow.CallChaptor</div>
+                    </td>
+                    <td style="width:30%;">
+                        主席
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        同唱
+                    </td>
+                    <td>
+                        主在圣殿中
+                    </td>
+                    <td>
+                        众立
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        诗歌
+                    </td>
+                    <td>
+                        <ul style="margin-left:80px;list-style:decimal;padding:0;">
+                            <li style="padding:0;margin:15px;"><a href="https://www.youtube.com/watch?v=wozKx2hQaW0" style="text-decoration:none;">同路人​</a></li>
+                            <li style="padding:0;margin:15px;"><a href="https://www.youtube.com/watch?v=xjvgan-_rf4" style="text-decoration:none;">基督精兵前进</a></li>
+                        </ul>
+                    </td>
+                    <td>小诗班​</td>
+                </tr>
+                <tr>
+                    <td>
+                        祷告
+                    </td>
+                    <td></td>
+                    <td>
+                        主席
+                    </td>
+                </tr>
+                <tr>
+                    <td>献诗</td>
+                    <td>
+                        【我的神 我的父 我的磐石】
+
+                        【思念主爱】
+                    </td>
+                    <td>恩雨诗班</td>
+                </tr>
+                <tr>
+                    <td>
+                        读经
+                    </td>
+                    <td>
+                        @Model.WorkFlow.BibleReading
+                    </td>
+                    <td>
+                        主席/会众
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        讲道
+                    </td>
+                    <td>
+                        @Model.WorkFlow.SermonTitle
+                    </td>
+                    <td>
+                        <a href="@Model.WorkFlow.SermonSpeakerUrl">@Model.WorkFlow.SermonSpeaker</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        本周金句
+                    </td>
+                    <td>
+                        <div>
+                            @Model.WorkFlow.BibleWeeklyChaptorDetail
+                        </div>
+                        <div style="text-align:right;">
+                            - @Model.WorkFlow.BibleWeeklyChaptor
+                        </div>
+                        @*                        <div>
+                    這樣，你們不再作外人和客旅，是與聖徒同國，是神家裡的人了；並且被建造在使徒和先知的根基上，有基督耶穌自己為房角石，
+                </div>
+                <div style="text-align:right;">
+                    - 弗2
+                </div>*@
+                    </td>
+                    <td>
+                        主席/会众
+                    </td>
+                </tr>
+                <tr>
+                    <td>洗礼</td>
+                    <td>
+                        武泰弟兄
+                        刘国祯姐妹
+                    </td>
+                    <td>汪正义牧师</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        圣经金句联颂
+                    </td>
+                    <td>恩福儿童主日学</td>
+                </tr>
+                <tr>
+                    <td>献诗</td>
+                    <td>
+                        亲眼看见你
+                    </td>
+                    <td>恩福堂恩慈小组</td>
+                </tr>
+                <tr>
+                    <td>献诗</td>
+                    <td>
+                        《向耶和华唱新歌》
+
+                        《唯一最爱是你》
+                    </td>
+                    <td>恩福堂诗班</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        堂庆感恩回顾
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        离任长老祝福
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        新任长老按立
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        新任执事劝勉
+                    </td>
+                    <td>汪正义牧师</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        牧者祝福
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        奉献
+                    </td>
+                    <td>
+                        <div>
+                            @Model.WorkFlow.DonationWeeklyChaptorDetail
+                        </div>
+                        <div style="text-align:right;">
+                            - @Model.WorkFlow.DonationWeeklyChaptor
+                        </div>
+                    </td>
+                    <td>
+                        主席
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        颂赞
+                    </td>
+                    <td>
+                        三一颂
+                    </td>
+                    <td>
+                        众立
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        祝祷
+                    </td>
+                    <td></td>
+                    <td>
+                        @Model.WorkFlow.Blessing
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        家事报告
+                    </td>
+                    <td></td>
+                    <td>
+                        主席
+                    </td>
+                </tr>
+                @if (Model.WorkFlow.Witness == true)
+                {
+                    <tr>
+                        <td>
+                            见证
+                        </td>
+                        <td>任焕雯姐妹​</td>
+                        <td></td>
+                    </tr>
+                }
+@*                <tr>
+                    <td>
+                        代祷事项
+                    </td>
+                    <td></td>
+                    <td>
+                        主席
+                    </td>
+                </tr>*@
+            </table>
+        </div>
+    </div>
+</div>

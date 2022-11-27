@@ -1,0 +1,40 @@
+﻿@model EnFu.Models.DonateListViewModel
+<h2>奉献 (@Model.DonateList.FirstOrDefault().DonateDate.ToString("yyyy-MM-dd"))</h2>
+<p>周报时间 (@Model.DonateList.FirstOrDefault().DonateDate.AddDays(7).ToString("yyyy-MM-dd"))</p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <hr />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="保存奉献" class="btn btn-success" />
+        </div>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @if (Model != null && Model.DonateList != null && Model.DonateList.Count > 0)
+    {
+        for (int i = 0; i < Model.DonateList.Count; i++)
+        {
+            <div class="form-group">
+                <div class="col-md-2" style="text-align:right;">
+                    @Model.DonateList[i].DonateType: &nbsp;
+                </div>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.DonateList[i].DonateNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DonateList[i].DonateNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.DonateList[i].DonateId)
+            @Html.HiddenFor(model => model.DonateList[i].DonateType)
+            @Html.HiddenFor(model => model.DonateList[i].DonateDate)
+        }
+    }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="保存奉献" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+

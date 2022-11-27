@@ -1,0 +1,163 @@
+﻿@model EnFu.Models.BibleReadingPdfViewModel
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+    body {
+        font-size: 56px;
+        background-color: lightgray;
+    }
+
+    div {
+        font-size: 56px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .longHeightLink {
+        display: block;
+        border-radius: 20px;
+        border: 10px solid #019591;
+        height: 250px;
+        background-color: #019591;
+    }
+
+    .pageBody {
+        background-color: lightgray;
+        font-family: arial;
+        margin-top: 150px;
+    }
+
+    .sectionTitleContainer {
+        height: 70px;
+        font-size: 70px;
+        font-weight: 600;
+    }
+
+    ul {
+        margin: 0;
+        padding: 5px;
+        list-style: none;
+    }
+
+        ul li {
+            text-align: left;
+            padding: 5px;
+        }
+
+    .multimedia-link {
+        margin: 5px;
+        margin-top: 30px;
+        padding: 15px;
+        background-color: white;
+        font-size: 70px;
+        -webkit-filter: drop-shadow(3px 3px 1px #ccc);
+        text-shadow: 3px 3px 1px #ccc;
+        box-shadow: 5px 5px 1px #ccc;
+        border-radius: 25px;
+        border: 15px solid #019591;
+        border-bottom: 2px;
+        border-left: 2px;
+        border-right: 2px;
+    }
+</style>
+<div class="pageBody">
+    <div style="height:30px;"></div>
+    <div class="multimedia-link" style="margin-top:50px;height:160px;">
+        <div style="display:inline-block;float:left;width:140px;padding:0;"><a target="_blank" href="http://www.enfualliance.org/" style="font-size:140px;"><img src="http://cafebistro.ca/S3/EnFuLogo.png" style="width:140px;" /></a></div>
+        <div style="display:inline-block;float:left;width:750px;padding-top:40px;font-size:73px;">
+            西岛华人宣道会恩福堂
+        </div>
+    </div>
+    <div class="multimedia-link" style="height:170px;">
+        <div style="font-size:90px;">2022年 每日读经</div>
+        <div style="font-size:40px;">(读经说明请参考下面的介绍)</div>
+    </div>
+    <div class="multimedia-link" style="font-size:75px;height:750px;">
+        <div style="font-size:80px;font-weight:600;">@Model.CurrentDate</div>
+        <div style="padding-top: 20px; clear: both;">
+            <div style="display: inline-block; float: left; width: 60%; padding-top: 20px;">
+                @Model.ChaptorTitle1
+            </div>
+            <div style="display: inline-block; float: right; width: 38%; font-size: 85px;">
+                <a class="longHeightLink" href="@Model.BibleReadings1[0].BibleUrl" target="_blank">
+                    中文链接
+                </a>
+            </div>
+        </div>
+        <div style="padding-top: 40px; clear:both;">
+            <div style="display:inline-block;float:left;width:60%;padding-top:20px;">
+                @Model.ChaptorTitle2
+            </div>
+            <div style="display: inline-block; float: right; width: 38%; font-size: 85px;">
+                <a class="longHeightLink" href="@Model.BibleReadings2[0].BibleUrl" target="_blank">
+                    中文链接
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="multimedia-link" style="height:500px;">
+        <div>
+            <div style="padding:10px;">
+                每日恩福-<span>姜平牧师</span>
+            </div>
+            <div style="padding:10px;">
+                <div style="display: inline-block; float: left; width: 28%; padding: 10px; font-size: 85px;">
+                    <a class="longHeightLink" href="@Model.BibleReadings[0].ViewModels[0].AudioEnfu" target="_blank">
+                        音频
+                    </a>
+                </div>
+                <div style="display: inline-block; float: left; width: 28%; padding: 10px; font-size: 85px;">
+                    <a class="longHeightLink" href="@Model.BibleReadings[0].ViewModels[0].VideoEnfu" target="_blank">
+                        视频
+                    </a>
+                </div>
+                <div style="display: inline-block; float: left; width: 35%; padding: 10px; font-size: 85px;">
+                    <a class="longHeightLink" href="@Model.BibleReadings[0].ViewModels[0].Youtube" target="_blank">
+                        Youtube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="multimedia-link" style="height:850px;">
+        <div>
+            <div style="padding:10px;">
+                @Model.BibleReadings1[0].BibleReadingChaptor-蔡志明传道
+            </div>
+            <div style="padding:10px;">
+                @for (int i = 0; i < Model.BibleReadings1.Count;i++)
+                {
+                    <div style="display: inline-block; float: left; width: 30%; padding: 10px; font-size: 85px;">
+                        <a class="longHeightLink" href="@Model.BibleReadings1[i].AudioCai" target="_blank">
+                            @Model.BibleReadings1[i].ChapterSN 章
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+        <div style="margin-top: 20px;clear:both;">
+            <div style="padding: 10px;padding-top:40px;">
+                @Model.BibleReadings2[0].BibleReadingChaptor-蔡志明传道
+            </div>
+            <div style="padding: 10px; padding-top: 20px; font-size: 85px;">
+                @for (int i = 0; i < Model.BibleReadings2.Count;i++)
+                {
+                    <div style="display: inline-block; float: left; width: 30%; padding: 10px; font-size: 85px;">
+                        <a class="longHeightLink" href="@Model.BibleReadings2[i].AudioCai" target="_blank">
+                            @Model.BibleReadings2[i].ChapterSN 章
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="multimedia-link">
+        <div class="sectionTitleContainer">读经说明</div>
+        <div style="clear:both;">
+            <ul style="margin-left:80px;list-style:decimal;padding:0;">
+                <li>点击章节蓝色字体,点击youtube或音频或视频图标会播放</li>
+            </ul>
+        </div>
+    </div>
+</div>

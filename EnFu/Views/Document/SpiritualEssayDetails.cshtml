@@ -1,0 +1,55 @@
+﻿@model EnFu.Models.SpiritualEssayViewModel
+<h2>靈修小品 (@Model.SpiritualEssaySunday.ToString("yyyy-MM-dd"))</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <hr />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="保存靈修小品" class="btn btn-success" />
+        </div>
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-2" style="text-align:right;">
+            @Html.LabelFor(model => model.SpiritualEssayTitle, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SpiritualEssayTitle, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SpiritualEssayChaptor, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-2" style="text-align:right;">
+            @Html.LabelFor(model => model.SpiritualEssayChaptor, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.SpiritualEssayChaptor, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SpiritualEssayChaptor, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.SpiritualEssayContent, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.SpiritualEssayContent, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SpiritualEssayContent, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.SpiritualEssayPray, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.SpiritualEssayPray, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SpiritualEssayPray, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @Html.HiddenFor(model => model.SpiritualEssayId)
+    @Html.HiddenFor(model => model.SpiritualEssaySunday)
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="保存靈修小品" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+

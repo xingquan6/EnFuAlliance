@@ -1,0 +1,323 @@
+﻿@model EnFu.Models.WorkFlowViewModel
+<style>
+    table {
+        font-size: 1em;
+    }
+
+        table tr:nth-child(even) {
+            background: #FFFFFF;
+        }
+
+        table tr:nth-child(odd) {
+            background: #DCE6F2;
+        }
+
+        table tr td {
+            text-align: center;
+            border: 1px solid lightgray;
+            padding: 10px;
+        }
+
+            table tr td:nth-child(2) {
+                text-align: left;
+            }
+
+    input[type=checkbox] {
+        -ms-transform: scale(1.5); /* IE */
+        -moz-transform: scale(1.5); /* FF */
+        -webkit-transform: scale(1.5); /* Safari and Chrome */
+        -o-transform: scale(1.5); /* Opera */
+        padding: 10px;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("#ddlCallChaptor").change(function () {
+            var text = $('#ddlCallChaptor :selected').text();
+            $.ajax({
+                type: "GET",
+                url: "/Document/CallChaptorDetail?callChaptor="+text,
+                success: function (data) {
+                    $('#divCallChaptorDetail').text(data);
+                    console.log(data);
+                },
+                error: function () {
+                    alert("Error occured!!")
+                }
+            }); 
+        });
+        $("#ddlDonateBibleChaptor").change(function () {
+            var text = $('#ddlDonateBibleChaptor :selected').text();
+            $.ajax({
+                type: "GET",
+                url: "/Document/DonateBibleChaptorDetail?chaptor=" + text,
+                success: function (data) {
+                    $('#divDonateBibleChaptorDetail').text(data);
+                    console.log(data);
+                },
+                error: function () {
+                    alert("Error occured!!")
+                }
+            });
+        });
+    });
+
+</script>
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h2>主日崇拜流程 - @Model.SundayDate.ToString("yyyy-MM-dd")</h2> 
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <table style="width:100%;" class="tblWorkFlow">
+        <tr>
+            <td style="font-size:1.5em;">宣召</td>
+            <td>
+                <div class="form-group" style="margin-top:10px;">
+                    @Html.LabelFor(model => model.CallChaptor, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.CallChaptor,
+                                new SelectList(EnFu.Modules.DataProcesser.GetCallChaptors()),
+                                new { @class = "form-control", @id= "ddlCallChaptor" })
+                        @Html.ValidationMessageFor(model => model.CallChaptor, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CallDetail, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" id="divCallChaptorDetail">
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:1.5em;">诗歌</td>
+            <td>
+                <div class="col-md-12">
+                    @for (var i = 0; i < Model.WorshipSongs.Count; i++)
+                    {
+                    <div class="col-md-12">
+                        <div class="col-md-1" style="padding:5px;">
+                            @Html.LabelFor(model => model.WorshipSongs[i].Name, htmlAttributes: new { @class = "control-label" })@(i + 1)
+                        </div>
+                        <div class="col-md-3" style="padding:5px;">
+                            @Html.EditorFor(model => model.WorshipSongs[i].Name, new { @class = "form-check-input col-md-12" })
+                        </div>
+                        <div class="col-md-1" style="padding:5px;">
+                            @Html.LabelFor(model => model.WorshipSongs[i].Url, htmlAttributes: new { @class = "control-label col-md-12" })
+                        </div>
+                        <div class="col-md-4" style="padding:5px;">
+                            @Html.EditorFor(model => model.WorshipSongs[i].Url, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                        </div>
+                    </div>
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:1.5em;">圣餐</td>
+            <td>
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.IsEucharist, htmlAttributes: new { @class = "control-label col-md-6" })
+                    @Html.EditorFor(model => model.IsEucharist, new { @class = "form-check-input col-md-6" })
+                </div>
+                <div class="col-md-8">
+                    @Html.LabelFor(model => model.EucharistOperator, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EucharistOperator, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EucharistOperator, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:1.5em;">读经</td>
+            <td>
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.BibleReading, htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(m => m.BibleReading,
+                                new SelectList(EnFu.Modules.DataProcesser.GetBibleChaptorFullNames()),
+                                new { @class = "form-control", @id= "ddlBibleWeeklyChaptor" })
+                            @Html.ValidationMessageFor(model => model.BibleWeeklyChaptor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="col-md-6">
+                            章
+                        </div>
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(m => m.BibleReading,
+    new SelectList(EnFu.Modules.DataProcesser.GetBibleChaptorFullNames()),
+    new { @class = "form-control", @id= "ddlBibleWeeklyChaptor" })
+                            @Html.ValidationMessageFor(model => model.BibleWeeklyChaptor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="col-md-6">
+                            开始
+                        </div>
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(m => m.BibleReading,
+    new SelectList(EnFu.Modules.DataProcesser.GetBibleChaptorFullNames()),
+    new { @class = "form-control", @id= "ddlBibleWeeklyChaptor" })
+                            @Html.ValidationMessageFor(model => model.BibleWeeklyChaptor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="col-md-6">
+                            到
+                        </div>
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(m => m.BibleReading,
+    new SelectList(EnFu.Modules.DataProcesser.GetBibleChaptorFullNames()),
+    new { @class = "form-control", @id= "ddlBibleWeeklyChaptor" })
+                            @Html.ValidationMessageFor(model => model.BibleWeeklyChaptor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.BibleReadingDetail, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="col-md-10" id="divBibleReadingDetail">
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:1.5em;">本周金句</td>
+            <td>
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.BibleWeeklyChaptor, htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(m => m.BibleWeeklyChaptor,
+                                new SelectList(EnFu.Modules.DataProcesser.GetBibleChaptorFullNames()),
+                                new { @class = "form-control", @id= "ddlBibleWeeklyChaptor" })
+                            @Html.ValidationMessageFor(model => model.BibleWeeklyChaptor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="col-md-6">
+                            章
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" style="display: inline-block;width:60px;" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="col-md-6">
+                            开始
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" style="display: inline-block;width:60px;" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="col-md-6">
+                            到
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" style="display: inline-block;width:60px;" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.BibleWeeklyChaptorDetail, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="col-md-10" id="divBibleWeeklyChaptorDetail">
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:1.5em;">奉献</td>
+            <td>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DonationWeeklyChaptor, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.DonationWeeklyChaptor,
+                                new SelectList(EnFu.Modules.DataProcesser.GetDonateBibleChaptors()),
+                                new { @class = "form-control", @id= "ddlDonateBibleChaptor" })
+                        @Html.ValidationMessageFor(model => model.CallChaptor, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DonationWeeklyChaptorDetail, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" id="divDonateBibleChaptorDetail">
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:1.5em;">祝祷</td>
+            <td>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Blessing, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Blessing, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Blessing, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:1.5em;">见证</td>
+            <td>
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.IsWitness, htmlAttributes: new { @class = "control-label col-md-6" })
+                    @Html.EditorFor(model => model.IsWitness, new { @class = "form-check-input col-md-6" })
+                </div>
+                <div class="col-md-8">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:1.5em;">受洗</td>
+            <td>
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.IsBaptized, htmlAttributes: new { @class = "control-label col-md-6" })
+                    @Html.EditorFor(model => model.IsBaptized, new { @class = "form-check-input col-md-6" })
+                </div>
+                <div class="col-md-8">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:1.5em;">聚餐</td>
+            <td>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Meal, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Meal, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Meal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:1.5em;">活动</td>
+            <td>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Activity, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Activity, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Activity, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="form-group col-md-12" style="margin-top:20px;">
+        <div class="col-md-12">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
