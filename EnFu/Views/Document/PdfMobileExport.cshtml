@@ -262,8 +262,8 @@
             <div class="churchInfoContainer">
                 <div class="churchInfo churchInfoTitle">教会地址</div>
                 <div class="churchInfo churchInfoContent">
-                    <a target="_blank" href="https://www.google.com/maps/place/298+Av.+Brookhaven,+Dorval,+QC+H9S+2N4/45.4442565,-73.7712992,17z/data=!3m1!4b1!4m5!3m4!1s0x4cc93debc413cf9f:0xf8fcf68d5c45c462!8m2!3d45.4442565!4d-73.7691105">
-                        298 Av. Brookheven, Dorval, QC, H9S2N4
+                    <a target="_blank" href="https://www.google.com/maps/place/233+Sainte-Claire+Ave,+Pointe-Claire,+QC+H9S+4E3/45.4348996,-73.8244418,17z/data=!3m1!4b1!4m5!3m4!1s0x4cc93e9d08372c6f:0x4d4931d8f2ec8ef6!8m2!3d45.4348996!4d-73.8222531">
+                        233 Ste-Claire Avenue Pointe-Claire, QC H9S 4E3
                     </a>
                 </div>
             </div>
@@ -384,12 +384,12 @@
                         <div style="text-align:right;">
                             - @Model.WorkFlow.BibleWeeklyChaptor
                         </div>
-                        @*                        <div>
-                                這樣，你們不再作外人和客旅，是與聖徒同國，是神家裡的人了；並且被建造在使徒和先知的根基上，有基督耶穌自己為房角石，
-                            </div>
-                            <div style="text-align:right;">
-                                - 弗2
-                            </div>*@
+                        <div>
+                            這樣，亞伯拉罕既恆久忍耐，就得了所應許的。​
+                        </div>
+                        <div style="text-align:right;">
+                            - 来6:15
+                        </div>
                     </td>
                     <td>
                         主席/会众
@@ -925,7 +925,7 @@
                     </td>
                     <td>
                         @if (Model.SundayDonate.SpreadDonate > 0)
-                        {<span style="font-size:11px;">$@Model.SundayDonate.SpreadDonate.ToString("F0")</span>}
+                        {<span style="font-size:11px;">$@Model.SundayDonate.SpreadDonate.ToString("F0") (URBANA)</span>}
                     </td>
                     <td>
                         @if (Model.SundayDonate.HuanHuanDonate > 0)
@@ -954,7 +954,7 @@
                     </td>
                     <td>
                         @if (Model.MonthlyDonate.MonthlySpreadDonate > 0)
-                        {<span style="font-size:11px;">$@Model.MonthlyDonate.MonthlySpreadDonate.ToString("F0")</span>}
+                        {<span style="font-size:11px;">$@Model.MonthlyDonate.MonthlySpreadDonate.ToString("F0") </span>}
                     </td>
                     <td>
                         @if (Model.MonthlyDonate.MonthlyHuanHuanDonate > 0)
