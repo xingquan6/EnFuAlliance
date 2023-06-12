@@ -641,6 +641,8 @@
     <Content Include="Views\Document\PdfMobileExportSpecialEventSimple.cshtml" />
     <Content Include="Views\Document\PdfMobileExportTemplate.cshtml" />
     <Content Include="Views\Document\PdfMobileExportBigFont.cshtml" />
+    <Content Include="Views\Document\PdfBibleReading2023.cshtml" />
+    <Content Include="Views\Document\PdfMobileExport2022Chrismas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bible\.vs\Bible\v16\" />

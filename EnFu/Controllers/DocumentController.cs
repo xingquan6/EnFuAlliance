@@ -530,7 +530,7 @@ namespace EnFu.Controllers
         public FileResult DownloadPdf(DownloadDocumentViewModel model)
         {
             string fileName =
-                (model.Type == 1) ? model.SundayDate.Replace("/", "") + "Phone.pdf"
+                (model.Type == 1) ? model.SundayDate.Replace("/", "").Replace("-", "") + "手机版.pdf"
                : (model.Type == 2) ? model.SundayDate.Replace("/", "") + "Print.pdf"
                : model.SundayDate.Replace("/", "") + "Worship.pdf";
             MemoryStream stream = GetPdfStream(DateTime.Parse(model.SundayDate), model.Type);
@@ -565,7 +565,7 @@ namespace EnFu.Controllers
             if (pdfType == 2)
             {
                 htmlToPdf.PageWidth = 216;
-                htmlToPdf.PageHeight = 2000;
+                htmlToPdf.PageHeight = 2400;
             }
             else
             {
@@ -593,7 +593,7 @@ namespace EnFu.Controllers
             {
                 case 1: htmlToPdf.PageWidth = 41;htmlToPdf.PageHeight = 1450;break;
                 case 2: htmlToPdf.PageWidth = 356; htmlToPdf.PageHeight = 216; break;
-                case 3: htmlToPdf.PageWidth = 216; htmlToPdf.PageHeight = 2600; break;
+                case 3: htmlToPdf.PageWidth = 216; htmlToPdf.PageHeight = 2800; break;
                 case 4: htmlToPdf.PageWidth = 254; htmlToPdf.PageHeight = 191; break;
                 default: htmlToPdf.PageWidth = 55; htmlToPdf.PageHeight = 2800; break;
             };            
@@ -640,7 +640,7 @@ namespace EnFu.Controllers
         private MemoryStream CreateBibleReadingPdfDocument(BibleReadingPdfViewModel model)
         {
             var header = "";
-            var content = RenderView(ControllerContext, "PdfBibleReading", model);
+            var content = RenderView(ControllerContext, "PdfBibleReading2023", model);
             var footer = "";
 
             var htmlToPdf = new HtmlToPdfConverter { PageHeaderHtml = header, PageFooterHtml = footer };

@@ -392,7 +392,7 @@ namespace EnFu.Modules
                 + sundayReportPdfViewModel.MonthlyDonate.MonthlyHuanHuanDonate
                 + sundayReportPdfViewModel.MonthlyDonate.MonthlyThankGivingDonate
                 + sundayReportPdfViewModel.MonthlyDonate.MonthlyOtherDonate;
-            sundayReportPdfViewModel.MonthBudget = (decimal)9081;
+            sundayReportPdfViewModel.MonthBudget = (decimal)11442.50;
             sundayReportPdfViewModel.MonthDonatePercentage = sundayReportPdfViewModel.MonthDonate / sundayReportPdfViewModel.MonthBudget;
 
 
@@ -418,26 +418,26 @@ namespace EnFu.Modules
                 .ToList();
             var bibleReadings = JsonConvert.DeserializeObject<List<BibleReadingViewModel>>(JsonConvert.SerializeObject(bibleReadingPdfViewModel.BibleReadings[0].ViewModels));
             bibleReadingPdfViewModel.BibleReadings1 = bibleReadings.Where(x => x.BibleReadingChaptor.Trim() == chaptors[0]).ToList();
-            bibleReadingPdfViewModel.BibleReadings2 = bibleReadings.Where(x => x.BibleReadingChaptor.Trim() == chaptors[1]).ToList();
+            //bibleReadingPdfViewModel.BibleReadings2 = bibleReadings.Where(x => x.BibleReadingChaptor.Trim() == chaptors[1]).ToList();
             var minChaptor1 = bibleReadingPdfViewModel.BibleReadings[0].ViewModels[0];
             var maxChaptor1 = bibleReadingPdfViewModel.BibleReadings[0].ViewModels
                 .Where(x => x.BibleReadingChaptor.Trim() == chaptors[0].Trim()).LastOrDefault();
-            var minChaptor2 = bibleReadingPdfViewModel.BibleReadings[0].ViewModels
-                .Where(x => x.BibleReadingChaptor.Trim() == chaptors[1].Trim()).FirstOrDefault();
-            var maxChaptor2 = bibleReadingPdfViewModel.BibleReadings[0].ViewModels
-                .Where(x => x.BibleReadingChaptor.Trim() == chaptors[1].Trim()).LastOrDefault();
+            //var minChaptor2 = bibleReadingPdfViewModel.BibleReadings[0].ViewModels
+            //    .Where(x => x.BibleReadingChaptor.Trim() == chaptors[1].Trim()).FirstOrDefault();
+            //var maxChaptor2 = bibleReadingPdfViewModel.BibleReadings[0].ViewModels
+            //    .Where(x => x.BibleReadingChaptor.Trim() == chaptors[1].Trim()).LastOrDefault();
             bibleReadingPdfViewModel.ChaptorTitle1 = 
                 (minChaptor1.ChapterSN== maxChaptor1.ChapterSN) 
                 ? chaptors[0].Trim() + minChaptor1.ChapterSN + "章"
                 : chaptors[0].Trim() + minChaptor1.ChapterSN+"-"+ maxChaptor1.ChapterSN+"章";
-            bibleReadingPdfViewModel.ChaptorTitle2 = 
-                (minChaptor2.ChapterSN == maxChaptor2.ChapterSN) 
-                ? chaptors[1].Trim() + minChaptor2.ChapterSN + "章" 
-                    + ((downloadDocumentViewModel.Type==0)?"":minChaptor2.VerseSNFrom +"-"+maxChaptor2.VerseSNTo+"节")
-                : (downloadDocumentViewModel.Type == 0)
-                ?chaptors[1].Trim() + minChaptor2.ChapterSN + "-" + maxChaptor2.ChapterSN + "章"
-                : chaptors[1].Trim() + minChaptor2.ChapterSN + "章" + minChaptor2.VerseSNFrom + "-" + minChaptor2.VerseSNTo + "节"
-                 + maxChaptor2.ChapterSN + "章" + maxChaptor2.VerseSNFrom + "-" + maxChaptor2.VerseSNTo + "节";
+            //bibleReadingPdfViewModel.ChaptorTitle2 = 
+            //    (minChaptor2.ChapterSN == maxChaptor2.ChapterSN) 
+            //    ? chaptors[1].Trim() + minChaptor2.ChapterSN + "章" 
+            //        + ((downloadDocumentViewModel.Type==0)?"":minChaptor2.VerseSNFrom +"-"+maxChaptor2.VerseSNTo+"节")
+            //    : (downloadDocumentViewModel.Type == 0)
+            //    ?chaptors[1].Trim() + minChaptor2.ChapterSN + "-" + maxChaptor2.ChapterSN + "章"
+            //    : chaptors[1].Trim() + minChaptor2.ChapterSN + "章" + minChaptor2.VerseSNFrom + "-" + minChaptor2.VerseSNTo + "节"
+            //     + maxChaptor2.ChapterSN + "章" + maxChaptor2.VerseSNFrom + "-" + maxChaptor2.VerseSNTo + "节";
             return bibleReadingPdfViewModel;
         }
         public static List<BibleReadingPdfViewModel> GetBibleReadingMonthData(DownloadDocumentViewModel downloadDocumentViewModel)
@@ -459,26 +459,26 @@ namespace EnFu.Modules
                     .ToList();
                 var bibleReadings = JsonConvert.DeserializeObject<List<BibleReadingViewModel>>(JsonConvert.SerializeObject(bibleReadingPdfViewModel.BibleReadings[0].ViewModels));
                 bibleReadingPdfViewModel.BibleReadings1 = bibleReadings.Where(x => x.BibleReadingChaptor.Trim() == chaptors[0]).ToList();
-                bibleReadingPdfViewModel.BibleReadings2 = bibleReadings.Where(x => x.BibleReadingChaptor.Trim() == chaptors[1]).ToList();
+                //bibleReadingPdfViewModel.BibleReadings2 = bibleReadings.Where(x => x.BibleReadingChaptor.Trim() == chaptors[1]).ToList();
                 var minChaptor1 = bibleReadingPdfViewModel.BibleReadings[0].ViewModels[0];
                 var maxChaptor1 = bibleReadingPdfViewModel.BibleReadings[0].ViewModels
                     .Where(x => x.BibleReadingChaptor.Trim() == chaptors[0].Trim()).LastOrDefault();
-                var minChaptor2 = bibleReadingPdfViewModel.BibleReadings[0].ViewModels
-                    .Where(x => x.BibleReadingChaptor.Trim() == chaptors[1].Trim()).FirstOrDefault();
-                var maxChaptor2 = bibleReadingPdfViewModel.BibleReadings[0].ViewModels
-                    .Where(x => x.BibleReadingChaptor.Trim() == chaptors[1].Trim()).LastOrDefault();
+                //var minChaptor2 = bibleReadingPdfViewModel.BibleReadings[0].ViewModels
+                //    .Where(x => x.BibleReadingChaptor.Trim() == chaptors[1].Trim()).FirstOrDefault();
+                //var maxChaptor2 = bibleReadingPdfViewModel.BibleReadings[0].ViewModels
+                //    .Where(x => x.BibleReadingChaptor.Trim() == chaptors[1].Trim()).LastOrDefault();
                 bibleReadingPdfViewModel.ChaptorTitle1 =
                     (minChaptor1.ChapterSN == maxChaptor1.ChapterSN)
                     ? chaptors[0].Trim() + minChaptor1.ChapterSN + "章"
                     : chaptors[0].Trim() + minChaptor1.ChapterSN + "-" + maxChaptor1.ChapterSN + "章";
-                bibleReadingPdfViewModel.ChaptorTitle2 =
-                    (minChaptor2.ChapterSN == maxChaptor2.ChapterSN)
-                    ? chaptors[1].Trim() + minChaptor2.ChapterSN + "章"
-                        + ((downloadDocumentViewModel.Type == 0) ? "" : minChaptor2.VerseSNFrom + "-" + maxChaptor2.VerseSNTo + "节")
-                    : (downloadDocumentViewModel.Type == 0)
-                    ? chaptors[1].Trim() + minChaptor2.ChapterSN + "-" + maxChaptor2.ChapterSN + "章"
-                    : chaptors[1].Trim() + minChaptor2.ChapterSN + "章" + minChaptor2.VerseSNFrom + "-" + minChaptor2.VerseSNTo + "节"
-                     + maxChaptor2.ChapterSN + "章" + maxChaptor2.VerseSNFrom + "-" + maxChaptor2.VerseSNTo + "节";
+                //bibleReadingPdfViewModel.ChaptorTitle2 =
+                //    (minChaptor2.ChapterSN == maxChaptor2.ChapterSN)
+                //    ? chaptors[1].Trim() + minChaptor2.ChapterSN + "章"
+                //        + ((downloadDocumentViewModel.Type == 0) ? "" : minChaptor2.VerseSNFrom + "-" + maxChaptor2.VerseSNTo + "节")
+                //    : (downloadDocumentViewModel.Type == 0)
+                //    ? chaptors[1].Trim() + minChaptor2.ChapterSN + "-" + maxChaptor2.ChapterSN + "章"
+                //    : chaptors[1].Trim() + minChaptor2.ChapterSN + "章" + minChaptor2.VerseSNFrom + "-" + minChaptor2.VerseSNTo + "节"
+                //     + maxChaptor2.ChapterSN + "章" + maxChaptor2.VerseSNFrom + "-" + maxChaptor2.VerseSNTo + "节";
                 models.Add(bibleReadingPdfViewModel);
             };
             return models;            

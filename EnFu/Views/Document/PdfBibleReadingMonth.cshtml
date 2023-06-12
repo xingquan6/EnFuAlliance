@@ -28,42 +28,46 @@
     }
 </style>
 <div class="page-body">
-    <div style="font-size:22px;font-weight:bold;text-align:center">恩福堂2022年<span>@Model[0].CurrentMonth</span>灵修进度</div>
+    <div style="font-size:22px;font-weight:bold;text-align:center">恩福堂2023年<span>@Model[0].CurrentMonth</span>灵修进度</div>
     @foreach (var item in Model)
     {
-        <div class="day-section-container">
-            <div style="font-size:24px;font-weight:600;padding-left:10px;">@item.CurrentDay</div>
-            <div class="day-section">
-                @item.ChaptorTitle1<a class="longHeightLink" href="@item.BibleReadings1[0].BibleUrl" target="_blank"> 中文链接 </a>
-            </div>
-            <div class="day-section">
-                @item.ChaptorTitle2<a class="longHeightLink" href="@item.BibleReadings2[0].BibleUrl" target="_blank"> 中文链接 </a>
-            </div>
-            <div class="day-section">
-                每日恩福
-                <a class="longHeightLink" href="@item.BibleReadings[0].ViewModels[0].AudioEnfu" target="_blank"> 音频 </a>                
-                <a class="longHeightLink" href="@item.BibleReadings[0].ViewModels[0].VideoEnfu" target="_blank"> 视频 </a>
-                <a class="longHeightLink" href="@item.BibleReadings[0].ViewModels[0].Youtube" target="_blank"> Youtube </a>
-            </div>
-            <div class="day-section">蔡志明传道</div>
-            <div class="day-section">
-                    @item.BibleReadings1[0].BibleReadingChaptor
-                    @for (int i = 0; i < item.BibleReadings1.Count; i++)
-                    {
-                        <a class="longHeightLink" href="@item.BibleReadings1[i].AudioCai" target="_blank">
-                            @item.BibleReadings1[i].ChapterSN<span>章</span>
-                        </a>
-                    }
-            </div>
-            <div class="day-section">
-                    @item.BibleReadings2[0].BibleReadingChaptor
-                    @for (int i = 0; i < item.BibleReadings2.Count; i++)
-                    {
-                        <a class="longHeightLink" href="@item.BibleReadings2[i].AudioCai" target="_blank">
-                            @item.BibleReadings2[i].ChapterSN<span>章</span>
-                        </a>
-                    }
-            </div>
-        </div>
+<div class="day-section-container">
+    <div style="font-size:24px;font-weight:600;padding-left:10px;">@item.CurrentDay</div>
+    <div class="day-section">
+        <div style="font-size:20px;font-weight:500;text-align:center;">@item.ChaptorTitle1</div>        
+    </div>
+    <div class="day-section">
+        <a class="longHeightLink" href="@item.BibleReadings1[0].BibleUrl" target="_blank">中文链接 &nbsp; </a>
+        <a class="longHeightLink" href="@item.BibleReadings1[0].Url" target="_blank"> &nbsp; 注解 &nbsp; </a>
+        <a class="longHeightLink" href="@item.BibleReadings1[0].Audio" target="_blank"> &nbsp; 注解音频 &nbsp; </a>
+    </div>
+    @*<div class="day-section">
+            @item.ChaptorTitle2<a class="longHeightLink" href="@item.BibleReadings2[0].BibleUrl" target="_blank"> 中文链接 </a>
+        </div>*@
+    <div class="day-section">
+        每日恩福
+        @*<a class="longHeightLink" href="@item.BibleReadings[0].ViewModels[0].AudioEnfu" target="_blank"> 音频 </a>
+            <a class="longHeightLink" href="@item.BibleReadings[0].ViewModels[0].VideoEnfu" target="_blank"> 视频 </a>*@
+        <a class="longHeightLink" href="@item.BibleReadings[0].ViewModels[0].Youtube" target="_blank"> &nbsp;  Youtube </a>
+    </div>
+    <div class="day-section">
+        蔡志明传道
+        @for (int i = 0; i < item.BibleReadings1.Count; i++)
+        {
+        <a class="longHeightLink" href="@item.BibleReadings1[i].AudioCai" target="_blank">
+            &nbsp;  @item.BibleReadings1[i].ChapterSN<span>章</span>
+        </a>
+        }
+    </div>
+    @*<div class="day-section">
+                @item.BibleReadings2[0].BibleReadingChaptor
+                @for (int i = 0; i < item.BibleReadings2.Count; i++)
+                {
+                    <a class="longHeightLink" href="@item.BibleReadings2[i].AudioCai" target="_blank">
+                        @item.BibleReadings2[i].ChapterSN<span>章</span>
+                    </a>
+                }
+        </div>*@
+</div>
     }
 </div>
